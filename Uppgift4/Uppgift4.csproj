@@ -40,10 +40,10 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Security">
-      <HintPath>D:\Program och spel\npgsql\Mono.Security.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Informatik\piss\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
-      <HintPath>D:\Program och spel\npgsql\Npgsql.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Informatik\piss\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
