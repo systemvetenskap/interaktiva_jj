@@ -12,8 +12,7 @@ namespace Uppgift4
     public partial class Inloggad : System.Web.UI.Page
     {//hejhej
         
-        string XMLFragorna;
-        
+        string XMLFragorna;       
         XmlNodeList aktieNodeListFragor;
         XmlDocument docFra = new XmlDocument();
         List<FrageKlass> frageLista = new List<FrageKlass>();
@@ -38,6 +37,8 @@ namespace Uppgift4
                 lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
             }
         }
+
+
         private void LasInFraga()
         {
             if (licens == false)
