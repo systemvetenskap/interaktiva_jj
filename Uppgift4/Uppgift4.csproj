@@ -69,9 +69,6 @@
     <Content Include="Responsiv.css" />
     <Content Include="Stilmall.css" />
     <Content Include="Web.config" />
-    <Content Include="XMLAnvandare.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="XMLFragorna.xml">
       <SubType>Designer</SubType>
     </Content>

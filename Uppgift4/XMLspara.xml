@@ -1,4 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sparaTest>
-  <fraga nummer="1" namn="1" mittSvar="Du" Kategori="licens" />
+  <svar nummer="0" namn="1" mittSvar="0" ratt="ja" Kategori="Etik och regelverk." test="licens" />
+  <svar nummer="1" namn="1" mittSvar="1" ratt="ja" Kategori="Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi" test="licens" />
+  <svar nummer="2" namn="1" mittSvar="2" ratt="ja" Kategori="Produkter och hantering av kundens affärer" test="licens" />
+  <fraga nummer="3" namn="1" mittSvar="du" Kategori="Etik och regelverk." test="licens" />
+  <fraga nummer="2" namn="1" mittSvar="Joachim" Kategori="Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi" test="licens" />
+  <fraga nummer="1" namn="1" mittSvar="Kung Danmark" Kategori="Produkter och hantering av kundens affärer" test="licens" />
 </sparaTest>
