@@ -27,7 +27,6 @@ namespace Uppgift4
             //Kollainlogg(); 
             if (TextBox1.Text != "" && TextBox2.Text != "")
             {
-
                 bool pissBool = false;
                 NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
                 conn.Open();
@@ -37,7 +36,6 @@ namespace Uppgift4
                 if (dr.Read())
                 {
                     pissBool = true;
-                    //this.Hide();
                     Anvandare.anvandarnamn = TextBox1.Text;
                     Response.Redirect("~/Inloggad.aspx");                    
                 }

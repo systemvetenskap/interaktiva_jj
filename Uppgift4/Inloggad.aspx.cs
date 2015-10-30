@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-//HEHEJJEFJHKSDFHJKSDEFsdfgdsgsdfgsdfgsdf
+
 
 namespace Uppgift4
 {
     public partial class Inloggad : System.Web.UI.Page
-    {//hejhej
+    {
         
         string XMLFragorna;       
         XmlNodeList aktieNodeListFragor;
