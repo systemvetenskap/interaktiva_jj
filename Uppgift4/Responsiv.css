@@ -1,0 +1,60 @@
+﻿body {
+}
+
+
+@media screen and (max-width: 750px){
+    /*nav ul li{
+    width: 100%;
+    border-bottom: 0px solid black;
+    float: left;
+    margin: 10px 0px;
+ 
+              }
+
+nav{
+    margin: 5px 25px 25px 25px;
+}
+    */
+div.container{
+    margin: 25px 25px 25px 25px;
+}
+div.sektioner{
+   margin: 5px 0px 0px 0px;
+}
+div.sektionerna{
+    margin: 120px 0px 0px 0px;
+}
+ }
+
+@media screen and (max-width: 400px){
+    div.container{
+    margin: 0 auto 0 auto;
+}
+    nav ul li {
+        width: 100%;
+        border-bottom: 0px solid black;
+        font-size: 80%; 
+        
+                }
+div.sektioner{
+   margin: 50px 0px 0px 0px;
+}
+header{
+    height: 48px;
+    width: 152px;
+   
+      margin-top: 20px;
+      margin-bottom: 3px;
+    background-image: url("http://i.imgur.com/uzgIQgM.jpg");
+    
+}
+div.mobil{
+    width: auto;  
+    margin-right: 0;
+
+         }
+.hide-mobile{
+    display: none;
+    
+}
+}

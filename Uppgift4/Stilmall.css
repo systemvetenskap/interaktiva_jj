@@ -1,0 +1,185 @@
+﻿body {
+margin-top: 3px;
+
+    background-image: url("http://wallpaper.pickywallpapers.com/1600x900/simple-clean-blue-pattern.jpg");
+    }
+h1{
+    font-weight: 400;
+
+}
+a{
+    font-weight: 600;
+}
+p{
+   font-family: 'Times New Roman';
+   font-weight: 300;
+}
+
+header{
+      width: 200px;
+      height: 80px;
+      margin-top: 1px;
+      margin-bottom: 0;
+      background-image:url("http://i.imgur.com/7wan5M3.jpg");
+      
+}
+.container{
+    max-width: 1100px;
+    margin: 0 auto 0 auto;
+    padding: 0 20px;
+    background-color: white;
+    font-family: 'Buxton Sketch';
+    font-size: 100%;
+    color: black;
+
+}
+
+
+nav ul li {
+    list-style: none;
+    float: left; 
+  
+}
+nav{
+  
+    height: 2px;
+    background-color: blue;
+}
+
+ ul{
+  list-style: none;
+  display: inline;
+  text-align: center;
+
+
+}
+ /*a:link, a:visited{
+   
+    font-weight: bold;
+    font-family: 'Buxton Sketch';
+    padding: 8px;
+    text-transform: uppercase;
+    width: 150px;
+    background-color:white;
+    color: black;
+    box-shadow: 1px 2px 5px #888888;
+}*/
+
+ nav ul ul {
+    display: none;
+    background: #ebe7e7;
+    float: none;
+    position:  absolute;
+
+   
+}
+
+
+nav ul li:hover > ul{
+    display: block;
+width: 70px;
+
+  }
+
+nav ul {
+    font-family: 'Buxton Sketch';
+    background: #ebe7e7;
+    list-style: none;
+    display: inline-table;
+    padding: 0 20px 0 20px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px;
+
+  
+}
+nav ul:after{
+    content:  ""; clear: both;display: block;
+
+}
+
+nav ul li:hover{
+    background-color: #649de3;
+
+    
+}
+
+nav ul li:hover a {
+    color: black;
+
+
+}
+nav ul li a {
+    display: block; 
+    padding: 5px 15px;
+    color: black;
+    text-decoration: none;
+
+}
+.body{
+
+   
+    height: auto;
+ 
+}
+/*div.sektioner{
+    float: left;
+    margin: 5px;
+    border: 1px solid black;*/
+                               
+}
+div.sektion{
+    width: 50%;
+    float: left;
+    margin-right: 5%;
+    font-size: 80%
+   
+}
+div.sektion-tredje{
+    margin-right: 0;
+}
+img {
+    max-width: 90%;
+    height: auto;
+    margin: 0 0 10px 0;
+}
+video{
+    max-width: 90%;
+    height: auto;
+    margin: 0 0 10px 0;
+    
+}
+
+div.body{
+    padding: 30px 0 0 0;
+}
+footer{
+    
+    background-color:#ebe7e7; 
+    color: black;
+    text-align: left;
+    height: 40px;
+
+     
+}
+footer p{
+   text-align: right;  
+}
+
+/*div.sektionerna{
+    padding-bottom: 1px;
+   
+}
+div.sektionNagot{
+    width: 47%;
+    float: left;
+    margin-right: 5%;
+   
+}
+div.sektionAnnat{
+    width: auto;
+ 
+    margin-right: 0%;
+}*/
+
+.clearfix { overflow: auto;}

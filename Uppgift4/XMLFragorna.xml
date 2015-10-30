@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Licenstest-->
+<fragor>
+
+  <fraga>
+    <nummer>1</nummer>
+    <fragan>Vem är kungen av danmark?</fragan>
+    <a>Du</a>
+    <b>Jag</b>
+    <c>Kung Danmark</c>
+    <RattSvar>Kung Danmark</RattSvar>
+    <Kategori>Produkter och hantering av kundens affärer</Kategori>
+    <test>licens</test>
+  </fraga>
+
+  
+  <fraga>
+    <nummer>2</nummer>
+    <fragan>Vem är du?</fragan>
+    <a>Kungen av danmark</a>
+    <b>Kungen</b>
+    <c>Joachim</c>
+    <RattSvar>Joachim</RattSvar>
+    <Kategori>Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi</Kategori>
+    <test>licens</test>
+  </fraga>
+
+
+  <fraga>
+    <nummer>3</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>licens</test>
+  </fraga>
+
+
+</fragor>
+
+<!--
+Uppdatera/ändra sparad xml?
+Tips och trix xml?
+-->

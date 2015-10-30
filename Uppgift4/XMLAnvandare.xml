@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Allaanvandare>
+  <Anvandare>
+    <anvandarnamn>1</anvandarnamn>
+    <losenord>1</losenord>
+    <licensiering>nej</licensiering>
+    <!--<datumkunskapstest></datumkunskapstest>-->
+  </Anvandare>
+  <Anvandare>
+    <anvandarnamn>Kalle</anvandarnamn>
+    <losenord>Kalle</losenord>
+    <licensiering>ja</licensiering>
+  </Anvandare>
+  <Anvandare>
+    <anvandarnamn>Palle</anvandarnamn>
+    <losenord>Palle</losenord>
+    <licensiering>ja</licensiering>
+  </Anvandare>
+</Allaanvandare>
