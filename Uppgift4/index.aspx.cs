@@ -11,6 +11,7 @@ namespace Uppgift4
 {
     public partial class index : System.Web.UI.Page
     {
+        string sql;
         Anvandare anvandare = new Anvandare();
         string Anvandarna;
         XmlNodeList aktieNodeListFragor;
@@ -37,6 +38,7 @@ namespace Uppgift4
                 {
                     pissBool = true;
                     Anvandare.anvandarnamn = TextBox1.Text;
+                    Anvandare.licensiering = dr["licensierad"].ToString();
                     Response.Redirect("~/Inloggad.aspx");                    
                 }
                 else if (pissBool == false)
@@ -48,31 +50,58 @@ namespace Uppgift4
             }
         }
 
-        private void Kollainlogg()
-        {
 
-            Anvandarna = Server.MapPath("XMLAnvandare.xml");
+        //private void kollabehorighet()
+        //{
+        //    try
+        //    {
+        //        sql = "select licensierad from webbutveckling.anvandare where anvandarnamn = '" + Anvandare.anvandarnamn + "'";
+        //        NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+        //        NpgsqlCommand command;
+        //        conn.Open();
+        //        command = new NpgsqlCommand(sql, conn);
+        //        NpgsqlDataReader dr = command.ExecuteReader();
+        //        while (dr.Read())
+        //        {
+        //            Anvandare anvandare = new Anvandare();
+        //            Anvandare.anvandarnamn = dr["anvandarnamn"].ToString();
+        //            Anvandare.losenord = dr["losenord"].ToString();
+        //            Anvandare.licensiering = dr["licensierad"].ToString();
 
-            aktieNodeListFragor = docAnv.SelectNodes("/Allaanvandare/Anvandare");
-            docAnv.Load(Anvandarna);            
-            foreach (XmlNode nod in aktieNodeListFragor)
-            {
+        //        }
+        //        conn.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('FEL')", true);
+        //    }
+        //}
+
+        //private void Kollainlogg()
+        //{
+
+        //    Anvandarna = Server.MapPath("XMLAnvandare.xml");
+
+        //    aktieNodeListFragor = docAnv.SelectNodes("/Allaanvandare/Anvandare");
+        //    docAnv.Load(Anvandarna);            
+        //    foreach (XmlNode nod in aktieNodeListFragor)
+        //    {
                 
-                Anvandare.anvandarnamn = nod["anvandarnamn"].InnerText;
-                Anvandare.losenord = nod["losenord"].InnerText;
-                Anvandare.licensiering = nod["licensiering"].InnerText;
-                if (Anvandare.anvandarnamn == TextBox1.Text && Anvandare.losenord == TextBox2.Text)
-                {
-                    //anvandarlista.Add(anvandare);
-                    Response.Redirect("~/Inloggad.aspx");
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har skrivit fel lösenord')", true); 
-                }
+        //        Anvandare.anvandarnamn = nod["anvandarnamn"].InnerText;
+        //        Anvandare.losenord = nod["losenord"].InnerText;
+        //        Anvandare.licensiering = nod["licensiering"].InnerText;
+        //        if (Anvandare.anvandarnamn == TextBox1.Text && Anvandare.losenord == TextBox2.Text)
+        //        {
+        //            //anvandarlista.Add(anvandare);
+        //            Response.Redirect("~/Inloggad.aspx");
+        //        }
+        //        else
+        //        {
+        //            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har skrivit fel lösenord')", true); 
+        //        }
                 
-            }
+        //    }
 
-        }
+        //}
     }
 }

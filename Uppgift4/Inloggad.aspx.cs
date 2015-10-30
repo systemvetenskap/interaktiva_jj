@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +14,10 @@ namespace Uppgift4
 {
     public partial class Inloggad : System.Web.UI.Page
     {
-        
+        string kategori;
+        string sql;
+        DataTable dt = new DataTable();
+        NpgsqlDataAdapter da;
         string XMLFragorna;       
         XmlNodeList aktieNodeListFragor;
         XmlDocument docFra = new XmlDocument();
@@ -19,7 +25,7 @@ namespace Uppgift4
         List<Anvandare> anvandareLista = new List<Anvandare>();
         int FrageNummer;
         bool licens;
-        string licensiering = "";
+        string licensiering;
         //för att rättafdsfsd
         XmlNodeList XMLFragorMetodRatta;
         XmlNodeList XMLSvarMetodRatta;
@@ -71,12 +77,16 @@ namespace Uppgift4
 
                 if (fragansNummer == FrageNummer.ToString() && fraga.nummer == FrageNummer.ToString())
                 {
-                    frageLista.Add(fraga);
-                    LabelFraga.Text = ": " + frageLista[FrageNummer].fragan;
-                    RadioButtonList1.Items.FindByValue("A").Text = frageLista[FrageNummer].a;
-                    RadioButtonList1.Items.FindByValue("B").Text = frageLista[FrageNummer].b;
-                    RadioButtonList1.Items.FindByValue("C").Text = frageLista[FrageNummer].c;
-                    lblKategori.Text = frageLista[FrageNummer].Kategori;
+                        
+                        frageLista.Add(fraga);
+                        kategori = null;
+                        LabelFraga.Text = ": " + frageLista[FrageNummer].fragan;
+                        RadioButtonList1.Items.FindByValue("A").Text = frageLista[FrageNummer].a;
+                        RadioButtonList1.Items.FindByValue("B").Text = frageLista[FrageNummer].b;
+                        RadioButtonList1.Items.FindByValue("C").Text = frageLista[FrageNummer].c;
+                        lblKategori.Text = frageLista[FrageNummer].Kategori;
+                        
+                    
                 }
                 else if (FrageNummer == 4)
                 {
@@ -90,11 +100,24 @@ namespace Uppgift4
             labelnummer++;
 
         }
+        private void sparaDatabas()
+        {
+            try
+            {
+                NpgsqlCommandBuilder cb = new NpgsqlCommandBuilder(da);
+                da.Update(dt);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
         private void sparaXml()
         {
             //fixa så rätt nummer 
             //int haj = Convert.ToInt16(LabelNummer.Text);
             string hej = LabelNummer.Text;
+            
 
             //öppnar, dumt att inte göra/använda samma som tidigare?strul att använda samma?
             System.Xml.XmlDocument docX = new System.Xml.XmlDocument();
@@ -106,14 +129,15 @@ namespace Uppgift4
             xmlElement.SetAttribute("nummer", hej);
             xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
             xmlElement.SetAttribute("mittSvar", RadioButtonList1.SelectedItem.Text);
+            xmlElement.SetAttribute("Kategori", lblKategori.Text);
 
             if (licens == false)
             {
-                xmlElement.SetAttribute("Kategori", "licens");
+                xmlElement.SetAttribute("test", "licens");
             }
             else
             {
-                xmlElement.SetAttribute("Kategori", "kunskap");
+                xmlElement.SetAttribute("test", "kunskap");
             }
             //inseet
             docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
@@ -122,60 +146,17 @@ namespace Uppgift4
             //TextBox1.Text = "";
             RadioButtonList1.SelectedIndex = 0;
             BindData();
+            
         }
 
-        private void sparaAnvandareXml()
-        {
-            //fixa så rätt nummer 
-            //int haj = Convert.ToInt16(LabelNummer.Text);
-            //string hej = LabelNummer.Text;
 
-            //öppnar, dumt att inte göra/använda samma som tidigare?strul att använda samma?
-            System.Xml.XmlDocument docX = new System.Xml.XmlDocument();
-            docX.Load(Server.MapPath("XMLAnvandare.xml"));
-            System.Xml.XmlNode xmlNode = docX.DocumentElement.FirstChild;
-            //skapa fixa så skapas klass sen
-
-            System.Xml.XmlElement xmlElement = docX.CreateElement("Anvanadre");
-            xmlElement.SetAttribute("anvandarnamn", Server.HtmlEncode(Anvandare.anvandarnamn));
-            xmlElement.SetAttribute("losenord", Server.HtmlEncode(Anvandare.losenord));
-            xmlElement.SetAttribute("licensiering", licensiering);
-
-            //inseet
-            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
-            docX.Save(Server.MapPath("XMLAnvandare.xml"));
-
-            //TextBox1.Text = "";
-            RadioButtonList1.SelectedIndex = 0;
-            BindData();
-        }
         void BindData()
         {
             XmlTextReader XmlReader = new XmlTextReader(Server.MapPath("XMLspara.xml"));
             XmlReader.Close();
         }
 
-        private void andrabehorighet()
-        {
 
-            XMLFragorna = Server.MapPath("XMLAnvandare.xml");
-            aktieNodeListFragor = docFra.SelectNodes("/Allaanvandare/Anvandare");
-            docFra.Load(XMLFragorna);
-
-            foreach (XmlNode nod in aktieNodeListFragor)
-            {
-                //Anvandare anv = new Anvandare();
-                //anv.anvandarnamn = nod["anvandarnamn"].InnerText;
-                //anv.licensiering = nod["licensiering"].InnerText;
-
-                //if(Anvandare.anvandarnamn == "1") //hårdkodat
-                //{
-                //    Anvandare.licensiering = "ja";
-                //    licensiering = Anvandare.licensiering;
-                //    sparaAnvandareXml();
-                //}
-            }
-        }
 
         private void rattaProv()
         {
@@ -215,6 +196,7 @@ namespace Uppgift4
                 fraga.c = nod["c"].InnerText;
                 fraga.RattSvar = nod["RattSvar"].InnerText;
                 fraga.Kategori = nod["Kategori"].InnerText;
+                fraga.test = nod["test"].InnerText;
                 frageLista.Add(fraga);
             }
             GridView2.DataSource = frageLista;
@@ -224,7 +206,10 @@ namespace Uppgift4
             metodRattaMinaSvar = Server.MapPath("XMLspara.xml");
             XMLSvarMetodRatta = docFra.SelectNodes("/sparaTest/fraga");
             docFra.Load(metodRattaMinaSvar);
-            int antalrattSvar = 0;
+            int totalrattSvar = 0;
+            int antalrattetik = 0;
+            int antalrattekonomi = 0;
+            int antalrattprodukter = 0;
             int i = 0;
             
 
@@ -235,6 +220,7 @@ namespace Uppgift4
                 svar.namn = nod.Attributes["namn"].Value;
                 svar.mittSvar = nod.Attributes["mittSvar"].Value;
                 svar.Kategori = nod.Attributes["Kategori"].Value;
+                svar.test = nod.Attributes["test"].Value;
 
                 if (svar.namn == Anvandare.anvandarnamn)
                 {
@@ -256,19 +242,34 @@ namespace Uppgift4
                         xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
                         xmlElement.SetAttribute("mittSvar", i.ToString());
                         xmlElement.SetAttribute("ratt", "ja");
+                        xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+
                         
                         if (licens == false)
                         {
-                            xmlElement.SetAttribute("Kategori", "licens");
+                            xmlElement.SetAttribute("test", "licens");
                         }
                         else
                         {
-                            xmlElement.SetAttribute("Kategori", "kunskap");
+                            xmlElement.SetAttribute("test", "kunskap");
                         }
 
                             docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
                             docX.Save(Server.MapPath("XMLspara.xml"));
-                            antalrattSvar++;
+                            totalrattSvar++;
+                        if(SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                        {
+                            antalrattekonomi++;
+                        }
+                        if (SvarLista[i].Kategori == "Etik och regelverk.")
+                        {
+                            antalrattetik++;
+                        }
+                        if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                        {
+                            antalrattprodukter++;
+                        }
+
                         
                     }
                     if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
@@ -278,24 +279,40 @@ namespace Uppgift4
                         xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
                         xmlElement.SetAttribute("mittSvar", i.ToString());
                         xmlElement.SetAttribute("ratt", "nej");
+                        xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
                         if (licens == false)
                         {
-                            xmlElement.SetAttribute("Kategori", "licens");
+                            xmlElement.SetAttribute("test", "licens");
                         }
                         else
                         {
-                            xmlElement.SetAttribute("Kategori", "kunskap");
+                            xmlElement.SetAttribute("test", "kunskap");
                         }
                         docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
                         docX.Save(Server.MapPath("XMLspara.xml"));
                     }         
                     i++;
-                }
-                lblKategori.Text = "Antal rätt svar: " + antalrattSvar.ToString();
+                } 
+            }
+            if (licens == false)
+            {
+                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('licens'," + antalrattekonomi +"," + antalrattprodukter +","+ antalrattetik +","+ totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
+            }
+            else
+            {
+                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
+            }
+
+ 
+                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+                NpgsqlCommand command;
+                conn.Open();
+                command = new NpgsqlCommand(sql, conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+                lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString();
+                sparaDatabas();
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
-                
-            }
         }
             
         protected void BtnForegaende_Click(object sender, EventArgs e)
@@ -337,7 +354,8 @@ namespace Uppgift4
         protected void BtnRatta_Click(object sender, EventArgs e)
         {
             rattaProv();
-            //andrabehorighet();
+            
         }
+
     }
 }
