@@ -11,6 +11,7 @@ namespace Uppgift4
 {
     public partial class Inloggad : System.Web.UI.Page
     {//hejhej
+        
         string XMLFragorna;
         
         XmlNodeList aktieNodeListFragor;
