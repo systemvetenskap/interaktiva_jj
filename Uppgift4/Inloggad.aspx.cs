@@ -347,6 +347,11 @@ namespace Uppgift4
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true); 
 
             }
+            if (procentTotalDec > SjuttioProcent)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkänt resultat')", true);
+
+            }
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
 
