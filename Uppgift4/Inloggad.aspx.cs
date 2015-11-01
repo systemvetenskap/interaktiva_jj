@@ -177,6 +177,16 @@ namespace Uppgift4
             {
                 metodRattaFragorna = Server.MapPath("XMLKunskapstest.xml");
             }
+
+
+
+            //för att kolla procent på totalrtt
+            decimal raknaTotal;
+            decimal procentTotalDec = 0;
+            string tabort;
+            string procentTotal = "";
+            decimal SjuttioProcent = 0.7M;
+            //procent total hit
             //öppnar, dumt att inte göra/använda samma som tidigare?strul att använda samma?
             System.Xml.XmlDocument docX = new System.Xml.XmlDocument();
             docX.Load(Server.MapPath("XMLspara.xml"));
@@ -306,17 +316,21 @@ namespace Uppgift4
             }
             if (licens == false)
             {
-                decimal raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
-                decimal procentTotalDec = Math.Round(raknaTotal,2);
-                string tabort = procentTotalDec.ToString();
-                string procentTotal = tabort.Replace(',', '.');
+                raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
+                procentTotalDec = Math.Round(raknaTotal,2);
+                tabort = procentTotalDec.ToString();
+                procentTotal = tabort.Replace(',', '.');
                 sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
 
                 //sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('licens'," + antalrattekonomi +"," + antalrattprodukter +","+ antalrattetik +","+ totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
             }
             if (licens == true)
             {
-                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
+                raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
+                procentTotalDec = Math.Round(raknaTotal, 2);
+                tabort = procentTotalDec.ToString();
+                procentTotal = tabort.Replace(',', '.');
+                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
             }
 
  
@@ -327,8 +341,15 @@ namespace Uppgift4
                 NpgsqlDataReader dr = command.ExecuteReader();
                 lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString();
                 sparaDatabas();
+
+            if(procentTotalDec<SjuttioProcent)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true); 
+
+            }
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
+
         }
             
         protected void BtnForegaende_Click(object sender, EventArgs e)
