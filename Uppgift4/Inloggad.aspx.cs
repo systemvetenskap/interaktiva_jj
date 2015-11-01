@@ -36,6 +36,7 @@ namespace Uppgift4
             //ta bort, bara för att inlogg inte funkar för mig
             Anvandare.anvandarnamn = "1";
             Anvandare.licensiering = "nej";
+
             //hit
 
             if (Anvandare.licensiering == "ja")
@@ -217,6 +218,7 @@ namespace Uppgift4
             int antalrattetik = 0;
             int antalrattekonomi = 0;
             int antalrattprodukter = 0;
+            int antalFragor = 0;
             int i = 0;
             
 
@@ -277,7 +279,7 @@ namespace Uppgift4
                             antalrattprodukter++;
                         }
 
-                        
+
                     }
                     if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
                     {
@@ -299,13 +301,20 @@ namespace Uppgift4
                         docX.Save(Server.MapPath("XMLspara.xml"));
                     }         
                     i++;
+                    antalFragor++;
                 } 
             }
             if (licens == false)
             {
-                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('licens'," + antalrattekonomi +"," + antalrattprodukter +","+ antalrattetik +","+ totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
+                decimal raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
+                decimal procentTotalDec = Math.Round(raknaTotal,2);
+                string tabort = procentTotalDec.ToString();
+                string procentTotal = tabort.Replace(',', '.');
+                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
+
+                //sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('licens'," + antalrattekonomi +"," + antalrattprodukter +","+ antalrattetik +","+ totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
             }
-            else
+            if (licens == true)
             {
                 sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
             }
