@@ -32,6 +32,12 @@ namespace Uppgift4
         List<SvarFragor> SvarLista = new List<SvarFragor>();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //ta bort, bara för att inlogg inte funkar för mig
+            Anvandare.anvandarnamn = "1";
+            Anvandare.licensiering = "nej";
+            //hit
+
             if (Anvandare.licensiering == "ja")
             {
                 lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
@@ -94,6 +100,7 @@ namespace Uppgift4
                     BtnNasta.Visible = false;
                     LabelNummer.Visible = false;
                     RadioButtonList1.Visible = false;
+                    BtnRatta.Visible = true;
                 }            
             }
          
@@ -345,7 +352,7 @@ namespace Uppgift4
             LabelFraga.Visible = true;
             LabelNummer.Visible = true;
             BtnStartatest.Visible = false;
-            BtnRatta.Visible = true;
+            //BtnRatta.Visible = true;
             lblRubrik.Visible = false;
             FrageNummer = 1;
             LasInFraga();
