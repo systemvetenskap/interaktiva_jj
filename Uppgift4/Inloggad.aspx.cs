@@ -51,7 +51,17 @@ namespace Uppgift4
             }
         }
 
+        private void andraTillLicensierad()
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            sql = "update webbutveckling.anvandare set licensierad = 'ja' where anvandarnamn = '"+Anvandare.anvandarnamn+"';";
+            sparaDatabas();
 
+        }
         private void LasInFraga()
         {
             if (licens == false)
@@ -138,6 +148,7 @@ namespace Uppgift4
             xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
             xmlElement.SetAttribute("mittSvar", RadioButtonList1.SelectedItem.Text);
             xmlElement.SetAttribute("Kategori", lblKategori.Text);
+            //xmlElement.SetAttribute("frågan", LabelFraga.Text);//testar
 
             if (licens == false)
             {
@@ -262,6 +273,7 @@ namespace Uppgift4
                         xmlElement.SetAttribute("mittSvar", i.ToString());
                         xmlElement.SetAttribute("ratt", "ja");
                         xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+                        //xmlElement.SetAttribute("frågan", LabelFraga.Text);
 
                         
                         if (licens == false)
@@ -333,6 +345,21 @@ namespace Uppgift4
                 sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
             }
 
+
+            if (procentTotalDec < SjuttioProcent)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
+
+            }
+            if (procentTotalDec > SjuttioProcent)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkänt resultat')", true);
+                if (licens == false)
+                {
+                    andraTillLicensierad();
+                }
+
+            }
  
                 NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
                 NpgsqlCommand command;
@@ -342,16 +369,7 @@ namespace Uppgift4
                 lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString();
                 sparaDatabas();
 
-            if(procentTotalDec<SjuttioProcent)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true); 
-
-            }
-            if (procentTotalDec > SjuttioProcent)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkänt resultat')", true);
-
-            }
+          
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
 
