@@ -37,6 +37,17 @@
     <test>licens</test>
   </fraga>
 
+  <fraga>
+    <nummer>4</nummer>
+    <fragan>Vad är etik?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>licens</test>
+  </fraga>
+
 
 </fragor>
 

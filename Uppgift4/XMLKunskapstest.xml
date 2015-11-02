@@ -38,5 +38,16 @@
     <test>kunskap</test>
   </fraga>
 
+  <fraga>
+    <nummer>4</nummer>
+    <fragan>Vad fan är etik?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>kunskap</test>
+  </fraga>
+
 
 </fragor>

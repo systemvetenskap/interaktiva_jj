@@ -105,7 +105,7 @@ namespace Uppgift4
                         
                     
                 }
-                else if (FrageNummer == 4)
+                else if (FrageNummer == 5)
                 {
                     LabelFraga.Text = "Slut på frågor";
                     BtnNasta.Visible = false;
@@ -168,7 +168,6 @@ namespace Uppgift4
             
         }
 
-
         void BindData()
         {
             XmlTextReader XmlReader = new XmlTextReader(Server.MapPath("XMLspara.xml"));
@@ -197,16 +196,39 @@ namespace Uppgift4
             string tabort;
             string procentTotal = "";
             decimal SjuttioProcent = 0.7M;
-            //procent total hit
-            //öppnar, dumt att inte göra/använda samma som tidigare?strul att använda samma?
+            //för att kolla rätt etik
+            decimal raknaEtik;
+            decimal procentEtikDec = 0;
+            string tabortEtik;
+            string EtikTotal = "";
+            decimal SextioProcent = 0.6M;
+            //för att kolla ekonomi
+            decimal raknaEkonomi;
+            decimal procentEkonomiDec = 0;
+            string tabortEkonomi;
+            string EkonomiTotal = "";
+            //för att kolla produkt
+            decimal raknaProdukt;
+            decimal procentProduktDec = 0;
+            string tabortProdukt;
+            string ProduktTotal = "";
+
+
+            int totalrattSvar = 0;
+            int antalFragor = 0;
+            int antalrattetik = 0;
+            int antalFragorEtik = 0;
+            int antalrattekonomi = 0;
+            int antalFragorEkonomi = 0;
+            int antalrattprodukter = 0;
+            int antalFragorProdukter = 0;
+
+            
             System.Xml.XmlDocument docX = new System.Xml.XmlDocument();
             docX.Load(Server.MapPath("XMLspara.xml"));
             System.Xml.XmlNode xmlNode = docX.DocumentElement.FirstChild;
-            //skapa fixa så skapas klass sen
-
-            //inseet
+         
        
-            //förstaListan
             LabelNummer.Text = Convert.ToString(FrageNummer);
             
             
@@ -235,11 +257,8 @@ namespace Uppgift4
             metodRattaMinaSvar = Server.MapPath("XMLspara.xml");
             XMLSvarMetodRatta = docFra.SelectNodes("/sparaTest/fraga");
             docFra.Load(metodRattaMinaSvar);
-            int totalrattSvar = 0;
-            int antalrattetik = 0;
-            int antalrattekonomi = 0;
-            int antalrattprodukter = 0;
-            int antalFragor = 0;
+        
+           
             int i = 0;
             
 
@@ -259,65 +278,83 @@ namespace Uppgift4
             }
 
 
+            frageLista.Reverse();
 
             foreach (Object svar in SvarLista)
             {
-                frageLista.Reverse();
                 if (SvarLista[i].nummer == frageLista[i].nummer)
                 {
                     if (SvarLista[i].mittSvar == frageLista[i].RattSvar)
                     {
+                        
                         System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
-                        xmlElement.SetAttribute("nummer", i.ToString());
+                        xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
                         xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
-                        xmlElement.SetAttribute("mittSvar", i.ToString());
+                        xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar); //i.ToString());
                         xmlElement.SetAttribute("ratt", "ja");
                         xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
                         //xmlElement.SetAttribute("frågan", LabelFraga.Text);
 
-                        
+
                         if (licens == false)
                         {
                             xmlElement.SetAttribute("test", "licens");
                         }
-                        else
+                        if (licens == true)
                         {
                             xmlElement.SetAttribute("test", "kunskap");
                         }
 
-                            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
-                            docX.Save(Server.MapPath("XMLspara.xml"));
-                            totalrattSvar++;
-                        if(SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+
+                        if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
                         {
                             antalrattekonomi++;
+                            antalFragorEkonomi++;
                         }
                         if (SvarLista[i].Kategori == "Etik och regelverk.")
                         {
                             antalrattetik++;
+                            antalFragorEtik++;
                         }
                         if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
                         {
                             antalrattprodukter++;
+                            antalFragorProdukter++;
                         }
+                        docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                        docX.Save(Server.MapPath("XMLspara.xml"));
+                        totalrattSvar++;
 
 
                     }
                     if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
                     {
                         System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
-                        xmlElement.SetAttribute("nummer", i.ToString());
+                        xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
                         xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
-                        xmlElement.SetAttribute("mittSvar", i.ToString());
+                        xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar);//i.ToString());
                         xmlElement.SetAttribute("ratt", "nej");
                         xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
                         if (licens == false)
                         {
                             xmlElement.SetAttribute("test", "licens");
                         }
-                        else
+                        if (licens == true)
                         {
                             xmlElement.SetAttribute("test", "kunskap");
+                        }
+
+                        if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                        {
+                            antalFragorEkonomi++;
+                        }
+                        if (SvarLista[i].Kategori == "Etik och regelverk.")
+                        {
+                            antalFragorEtik++;
+                        }
+                        if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                        {
+                            antalFragorProdukter++;
                         }
                         docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
                         docX.Save(Server.MapPath("XMLspara.xml"));
@@ -328,13 +365,14 @@ namespace Uppgift4
             }
             if (licens == false)
             {
+                //räkna på total och skicka in i databas
                 raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
                 procentTotalDec = Math.Round(raknaTotal,2);
                 tabort = procentTotalDec.ToString();
                 procentTotal = tabort.Replace(',', '.');
-                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
 
-                //sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn) values ('licens'," + antalrattekonomi +"," + antalrattprodukter +","+ antalrattetik +","+ totalrattSvar + ",'" + Anvandare.anvandarnamn + "')";
+                sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
+                
             }
             if (licens == true)
             {
@@ -342,31 +380,62 @@ namespace Uppgift4
                 procentTotalDec = Math.Round(raknaTotal, 2);
                 tabort = procentTotalDec.ToString();
                 procentTotal = tabort.Replace(',', '.');
+                
                 sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
+           
             }
 
+            string formprocentTotalDec = procentTotalDec.ToString("0.00%");
+            //räkna på Etik ska överiga lagras i databas?
+            //if (antalFragorEtik != 0)
+            //{
+                raknaEtik = (decimal)antalrattetik / (decimal)antalFragorEtik;
+                procentEtikDec = Math.Round(raknaEtik, 2);
+                tabortEtik = procentEtikDec.ToString();
+                EtikTotal = tabortEtik.Replace(',', '.');
+                string formprocentEtikDec = procentEtikDec.ToString("0.00%");
+            //}
+            //Räkna på ekonomi
+            //if (antalFragorEkonomi != 0)
+            //{
+                raknaEkonomi = (decimal)antalrattekonomi / (decimal)antalFragorEkonomi;
+                procentEkonomiDec = Math.Round(raknaEkonomi, 2);
+                tabortEkonomi = procentEkonomiDec.ToString();
+                EkonomiTotal = tabortEkonomi.Replace(',', '.');
+                string formprocentEkonomiDec = procentEkonomiDec.ToString("0.00%");
+            //}
+            //if (antalFragorProdukter != 0)
+            //{
+                //Räkna på produkt
+                raknaProdukt = (decimal)antalrattprodukter / (decimal)antalFragorProdukter;
+                procentProduktDec = Math.Round(raknaProdukt, 2);
+                tabortProdukt = procentProduktDec.ToString();
+                ProduktTotal = tabortProdukt.Replace(',', '.');
+                string formprocentProduktDec = procentProduktDec.ToString("0.00%");
+            //}
 
             if (procentTotalDec < SjuttioProcent)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
 
             }
-            if (procentTotalDec > SjuttioProcent)
+            if (procentTotalDec > SjuttioProcent&& procentEtikDec>SextioProcent&&procentEkonomiDec>SextioProcent&&procentProduktDec>SextioProcent)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkänt resultat')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkännt resultat')", true);
+
                 if (licens == false)
                 {
                     andraTillLicensierad();
                 }
 
             }
- 
-                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
-                NpgsqlCommand command;
-                conn.Open();
-                command = new NpgsqlCommand(sql, conn);
-                NpgsqlDataReader dr = command.ExecuteReader();
-                lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString();
+
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString() + "<br />" + "Andel rätt procent total: " + formprocentTotalDec + "<br />" + "Andel rätt procent Etik: " + formprocentEtikDec + "<br />" + "Andel rätt procent Ekonomi: " + formprocentEkonomiDec + "<br />" + "Andel rätt procent Produkt: " + formprocentProduktDec;
                 sparaDatabas();
 
           
