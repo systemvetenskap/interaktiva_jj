@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
+using System.Xml.Linq;
 
 
 namespace Uppgift4
@@ -462,6 +463,11 @@ namespace Uppgift4
           
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
+                //tar bort elementen svar och fråga från xmlspara, sökvägen är inte fullständig så funkar ej
+            //kan vara ett bra sätt att ta bort svar efter att dem använts, slipper vi dubblettproblemet.
+                //XElement root = XElement.Load("/XMLspara.xml");
+                //root.Descendants("sparaTest").Descendants().Remove();
+            //hit
 
         }
             
