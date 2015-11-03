@@ -41,11 +41,13 @@ namespace Uppgift4
                     //Anvandare.kunskapstest = dr["kunskapstest"].ToString();
                     //Anvandare.datumkunskapstest = dr["datumkunskapstest"];
                     Anvandare.roll = dr["roll"].ToString();
-                    listadminanv.Add(adminanv);
+
                 }
 
-                admingrid.DataSource = listadminanv;
-                admingrid.DataBind();
+                //admingrid.DataSource = listadminanv;
+                //admingrid.DataBind();
+            
+           
                 
                 
                 

@@ -33,7 +33,7 @@
 
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <asp:GridView ID="admingrid" runat="server"></asp:GridView>
+               
             </div>
             <div class="sektion sektion-andra mobil">
               <asp:Button ID="ladda" runat="server" Text="Button" OnClick="ladda_Click" /> 
