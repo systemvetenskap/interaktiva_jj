@@ -52,7 +52,12 @@ namespace Uppgift4
                 lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
             }
         }
-      
+        private void sattIhop()
+        {
+            
+            
+        
+        }
         private void andraTillLicensierad()
         {
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
@@ -186,8 +191,6 @@ namespace Uppgift4
             XmlReader.Close();
         }
 
-
-
         private void rattaProv()
         {
             string metodRattaFragorna;
@@ -251,6 +254,7 @@ namespace Uppgift4
 
             foreach (XmlNode nod in XMLFragorMetodRatta)
             {
+                
                 FrageKlass fraga = new FrageKlass();
                 fraga.nummer = nod["nummer"].InnerText;
                 fraga.fragan = nod["fragan"].InnerText;
