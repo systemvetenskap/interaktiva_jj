@@ -510,7 +510,9 @@ namespace Uppgift4
         protected void BtnRatta_Click(object sender, EventArgs e)
         {
             rattaProv();
-            
+            BtnRatta.Visible = false;
+            lblRubrik.Visible = false;
+
         }
 
     }
