@@ -37,8 +37,9 @@ namespace Uppgift4
             //ta bort, bara för att inlogg inte funkar för mig
             Anvandare.anvandarnamn = "1";
             Anvandare.licensiering = "nej";
-
             //hit
+
+
 
             if (Anvandare.licensiering == "ja")
             {
@@ -169,6 +170,19 @@ namespace Uppgift4
             
         }
 
+        private void raderaXMLspara()
+        {
+            ////radera kan vara ett bra sätt att ta bort svar efter att dem använts, slipper vi dubblettproblemet.
+            //XElement root = XElement.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+            //////root.Descendants("sparaTest").Descendants().Remove();
+            ////root.RemoveAll();
+            //root.Elements("fraga").Remove();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+            doc.DocumentElement.RemoveAll();
+            doc.Save(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+
+        }
         void BindData()
         {
             XmlTextReader XmlReader = new XmlTextReader(Server.MapPath("XMLspara.xml"));
@@ -463,12 +477,10 @@ namespace Uppgift4
           
                 GridView3.DataSource = SvarLista;
                 GridView3.DataBind();
-                //tar bort elementen svar och fråga från xmlspara, sökvägen är inte fullständig så funkar ej
-            //kan vara ett bra sätt att ta bort svar efter att dem använts, slipper vi dubblettproblemet.
-                //XElement root = XElement.Load("/XMLspara.xml");
-                //root.Descendants("sparaTest").Descendants().Remove();
-            //hit
 
+
+
+             
         }
             
         protected void BtnForegaende_Click(object sender, EventArgs e)
@@ -510,9 +522,8 @@ namespace Uppgift4
         protected void BtnRatta_Click(object sender, EventArgs e)
         {
             rattaProv();
-            BtnRatta.Visible = false;
-            lblRubrik.Visible = false;
-
+            raderaXMLspara();
+            
         }
 
     }
