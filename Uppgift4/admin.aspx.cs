@@ -16,51 +16,60 @@ namespace Uppgift4
         string sql;
         DataTable dt = new DataTable();
         NpgsqlDataAdapter da;
-        List<Anvandare> listadminanv = new List<Anvandare>();
+        List<AdmAnv> listadminanv = new List<AdmAnv>();
         protected void Page_Load(object sender, EventArgs e)
         {
            
         }
         private void laddatestare()
         {
-                
-                sql = "select * from webbutveckling.anvandare";
-                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+
+            sql = "select * from webbutveckling.anvandare;";
+ NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
                 NpgsqlCommand command;
                 conn.Open();
                 command = new NpgsqlCommand(sql, conn);            
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                string hej = null;
+                //string anv = null;
+                //string licens = null;
                 while (dr.Read())
                 {
-                    hej += dr["anvandarnamn"].ToString();
-                    //Anvandare adminanv = new Anvandare();
-                    //Anvandare.anvandarnamn = dr["anvandarnamn"].ToString();
-                    //Anvandare.losenord = dr["losenord"].ToString();
-                    //Anvandare.licensiering = dr["licensierad"].ToString();
-                    ////Anvandare.kunskapstest = dr["kunskapstest"].ToString();
-                    ////Anvandare.datumkunskapstest = dr["datumkunskapstest"];
-                    //Anvandare.roll = dr["roll"].ToString();
-                    //listadminanv.Add(adminanv);
+
+                    //AdmAnv nyanv = new AdmAnv();
+                    //nyanv.anvandarnamn = dr["anvandarnamn"].ToString();
+                    //nyanv.licensiering = dr["licensierad"].ToString();
+                    //nyanv.losenord = dr["losenord"].ToString();
+                    //nyanv.roll = dr["roll"].ToString();
+                    ListItem anvnamn = new ListItem(dr["anvandarnamn"].ToString());
+                    anvnamn.Attributes.Add("Licensierad", dr["licensierad"].ToString());
+                    //listadminanv.Add(nyanv);
+                    //ListBoxAnv.Items.Add
+                    yo++;
+                    ListBoxAnv.Items.Add(anvnamn);
+                   
                 }
+               
 
-                admingrid.DataSource = hej;
-                admingrid.DataBind();
-                
-                
-                
-                
-                //DataSet ds = new DataSet();
+          
+            //    while (dr.Read())
+            //    {
+            //        Kunder kund = new Kunder();
+            //        kund.namn = dr["namn"].ToString();
+            //        kund.personnr = dr["personnummer"].ToString();
+            //        kund.telefonnr = dr["telefonnummer"].ToString();
+            //        kund.adress = dr["adress"].ToString();
+            //        kund.epost = dr["epost"].ToString();
+            //        listBoxKunder.Items.Add(kund);
+            //    }
+          
 
-                //admingrid.DataSource = ds;
+
+
+                //admingrid.DataSource = listadminanv;
                 //admingrid.DataBind();
-
-                conn.Close();
-                    
-
-
-
+                //conn.Close();
+            
         }
         private void sparaDatabas()
         {

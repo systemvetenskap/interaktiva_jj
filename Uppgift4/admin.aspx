@@ -33,10 +33,12 @@
        
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <asp:GridView ID="admingrid" runat="server"></asp:GridView>              
+                <asp:GridView ID="admingrid" runat="server"></asp:GridView>
+                <asp:ListBox ID="ListBoxAnv" runat="server" Width="400px"></asp:ListBox>
             </div>
             <div class="sektion sektion-andra mobil">
-              <asp:Button ID="ladda" runat="server" Text="Button" OnClick="ladda_Click" /> 
+               
+              <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
             </div>
            
                 <div class="sektion sektion-tredje mobil">
