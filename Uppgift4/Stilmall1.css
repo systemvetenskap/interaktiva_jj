@@ -39,7 +39,7 @@ nav ul li {
   
 }
 nav{
-  
+    
     height: 2px;
     background-color: blue;
 }
@@ -116,22 +116,22 @@ nav ul li a {
 }
 .body{
 
-   
+    
     height: auto;
  
 }
-/*div.sektioner{
-    float: left;
-    margin: 5px;
-    border: 1px solid black;*/
+div.sektioner{
+    
+    margin: 20px;
+    
                                
 }
-div.sektion{
+.sektion{
     width: 50%;
     float: left;
     margin-right: 5%;
     font-size: 80%;
-    background-color: green;
+    margin-top: 10px;
 }
 .sektion-andra
 {
