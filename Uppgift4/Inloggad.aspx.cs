@@ -457,14 +457,15 @@ namespace Uppgift4
                 {
 
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal +",'ja')";
+                    
                     andraTillLicensierad();
+                    sparaDatabas(); 
                 }
                 if (licens == true)
                 {
 
-
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja')";
-
+                    sparaDatabas(); 
                 }
 
             }
@@ -537,8 +538,7 @@ namespace Uppgift4
         {
             rattaProv();
             raderaXMLspara();
-            BtnRatta.Visible = false;
-            
+            BtnRatta.Visible = false;           
         }
 
     }

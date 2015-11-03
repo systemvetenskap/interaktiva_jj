@@ -33,16 +33,49 @@
        
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <asp:GridView ID="admingrid" runat="server"></asp:GridView>
-                <asp:ListBox ID="ListBoxAnv" runat="server" Width="400px"></asp:ListBox>
+                <asp:ListBox ID="ListBoxAnv" runat="server" Width="199px" AutoPostBack="True" OnSelectedIndexChanged="ListBoxAnv_SelectedIndexChanged"></asp:ListBox>
+                 <br />
+                Användarnamn:
+                <asp:TextBox ID="anv" runat="server" Width="69px"></asp:TextBox>
+                <br />
+                Licensierad:
+                <asp:TextBox ID="licensierad" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                Roll:
+                <asp:TextBox ID="roll" runat="server" Width="69px"></asp:TextBox>
+                 <br />
             </div>
             <div class="sektion sektion-andra mobil">
                
               <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
+              <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" />
             </div>
            
                 <div class="sektion sektion-tredje mobil">
-     
+                testtyp:
+                <asp:TextBox ID="testtyp" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                    antalrätt ekonomi:
+                <asp:TextBox ID="antek" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                    antalrätt produkter:
+                <asp:TextBox ID="antpr" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                    antalrätt etik:
+                <asp:TextBox ID="antet" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                    antalrätt total:
+                <asp:TextBox ID="antto" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                    testid:
+                <asp:TextBox ID="testid" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                                        procenttotal:
+                <asp:TextBox ID="procto" runat="server" Width="69px"></asp:TextBox>
+                 <br />
+                                        Godkänd?:
+                <asp:TextBox ID="godkand" runat="server" Width="69px"></asp:TextBox>
+                 <br />
             </div>
 
        </div>   
