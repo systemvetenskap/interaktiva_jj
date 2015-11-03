@@ -7,7 +7,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="Stilmall1.css"/>
-    <%--<link rel="stylesheet" type="text/css" href="Responsiv.css"/>--%>
+    
     <title></title>
 </head>
 <body>
@@ -30,10 +30,10 @@
     <div class="body">
 
 
-
+       
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <asp:GridView ID="admingrid" runat="server"></asp:GridView>
+                <asp:GridView ID="admingrid" runat="server"></asp:GridView>              
             </div>
             <div class="sektion sektion-andra mobil">
               <asp:Button ID="ladda" runat="server" Text="Button" OnClick="ladda_Click" /> 
