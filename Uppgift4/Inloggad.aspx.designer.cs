@@ -103,21 +103,21 @@ namespace Uppgift4 {
         protected global::System.Web.UI.WebControls.Button BtnRatta;
         
         /// <summary>
-        /// GridView2 control.
+        /// lbl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Label lbl1;
         
         /// <summary>
-        /// GridView3 control.
+        /// lbl2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView3;
+        protected global::System.Web.UI.WebControls.Label lbl2;
     }
 }

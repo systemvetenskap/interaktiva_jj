@@ -34,10 +34,10 @@ namespace Uppgift4
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //ta bort, bara för att inlogg inte funkar för mig
-            Anvandare.anvandarnamn = "1";
-            Anvandare.licensiering = "nej";
-            //hit
+            ////ta bort, bara för att inlogg inte funkar för mig
+            //Anvandare.anvandarnamn = "1";
+            //Anvandare.licensiering = "nej";
+            ////hit
 
 
 
@@ -266,8 +266,10 @@ namespace Uppgift4
                 fraga.test = nod["test"].InnerText;
                 frageLista.Add(fraga);
             }
-            GridView2.DataSource = frageLista;
-            GridView2.DataBind();
+
+
+
+           
 
             string metodRattaMinaSvar;
             metodRattaMinaSvar = Server.MapPath("XMLspara.xml");
@@ -467,21 +469,32 @@ namespace Uppgift4
 
             }
 
-            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
-            NpgsqlCommand command;
-            conn.Open();
-            command = new NpgsqlCommand(sql, conn);
-            NpgsqlDataReader dr = command.ExecuteReader();
             lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString() + "<br />" + "Andel rätt procent total: " + formprocentTotalDec + "<br />" + "Andel rätt procent Etik: " + formprocentEtikDec + "<br />" + "Andel rätt procent Ekonomi: " + formprocentEkonomiDec + "<br />" + "Andel rätt procent Produkt: " + formprocentProduktDec;
                 sparaDatabas();
+               
+                int x = 0;
+                foreach (Object svar in SvarLista)
+                {   
+                    string fragan = frageLista[x].fragan.ToString();
+                    
+                    if(SvarLista[x].mittSvar == frageLista[x].RattSvar)
+                    {
+                        string html = "<font style='color: green'>" + fragan + "</font>";
+                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString();
+                    }
+                    if (SvarLista[x].mittSvar != frageLista[x].RattSvar)
+                    {
+                        string html = "<font style='color: red'>" + fragan + "</font>";
+                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString();
+                    }
+                    
+                    
+                    lbl2.Text += "<br />" + frageLista[x].RattSvar.ToString();
+                    x++;
 
-          
-                GridView3.DataSource = SvarLista;
-                GridView3.DataBind();
-
-
-
-             
+                }
+                lbl1.Visible = true;
+                lbl2.Visible = true;
         }
             
         protected void BtnForegaende_Click(object sender, EventArgs e)
@@ -524,6 +537,7 @@ namespace Uppgift4
         {
             rattaProv();
             raderaXMLspara();
+            BtnRatta.Visible = false;
             
         }
 

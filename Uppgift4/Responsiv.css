@@ -1,4 +1,5 @@
 ﻿body {
+    background-image: url("http://wallpaper.pickywallpapers.com/1600x900/simple-clean-blue-pattern.jpg");
 }
 
 
@@ -20,6 +21,7 @@ div.container{
 }
 div.sektioner{
    margin: 5px 0px 0px 0px;
+   background-image: url("http://wallpaper.pickywallpapers.com/1600x900/simple-clean-blue-pattern.jpg");
 }
 div.sektionerna{
     margin: 120px 0px 0px 0px;
