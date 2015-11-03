@@ -44,20 +44,21 @@ namespace Uppgift4
                     listadminanv.Add(adminanv);
                 }
 
-                //admingrid.DataSource = listadminanv;
-                //admingrid.DataBind();
-
+                admingrid.DataSource = listadminanv;
+                admingrid.DataBind();
+                
+                
                 
                 //DataSet ds = new DataSet();
 
                 //admingrid.DataSource = ds;
                 //admingrid.DataBind();
-            
+
                 conn.Close();
                     
 
 
-            
+
         }
         private void sparaDatabas()
         {
