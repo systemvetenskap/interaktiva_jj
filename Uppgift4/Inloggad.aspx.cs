@@ -52,7 +52,7 @@ namespace Uppgift4
                 lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
             }
         }
-
+      
         private void andraTillLicensierad()
         {
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
@@ -172,15 +172,12 @@ namespace Uppgift4
 
         private void raderaXMLspara()
         {
-            ////radera kan vara ett bra sätt att ta bort svar efter att dem använts, slipper vi dubblettproblemet.
-            //XElement root = XElement.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
-            //////root.Descendants("sparaTest").Descendants().Remove();
-            ////root.RemoveAll();
-            //root.Elements("fraga").Remove();
+        
             XmlDocument doc = new XmlDocument();
-            doc.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+        
+            doc.Load(Server.MapPath("XMLspara.xml"));
             doc.DocumentElement.RemoveAll();
-            doc.Save(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+            doc.Save(Server.MapPath("XMLspara.xml"));
 
         }
         void BindData()
