@@ -177,10 +177,21 @@ namespace Uppgift4
             //////root.Descendants("sparaTest").Descendants().Remove();
             ////root.RemoveAll();
             //root.Elements("fraga").Remove();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
-            doc.DocumentElement.RemoveAll();
-            doc.Save(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+                doc.DocumentElement.RemoveAll();
+                doc.Save(@"C:\Users\martina\Source\Repos\interaktiva_jj5\Uppgift4/XMLspara.xml");
+            }
+
+            catch
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load("XMLspara.xml");
+                doc.DocumentElement.RemoveAll();
+                doc.Save("XMLspara.xml");
+            }
 
         }
         void BindData()
