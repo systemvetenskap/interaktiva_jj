@@ -45,7 +45,7 @@ namespace Uppgift4
                     anvnamn.Attributes.Add("Licensierad", dr["licensierad"].ToString());
                     //listadminanv.Add(nyanv);
                     //ListBoxAnv.Items.Add
-                    yo++;
+                    
                     ListBoxAnv.Items.Add(anvnamn);
                    
                 }
