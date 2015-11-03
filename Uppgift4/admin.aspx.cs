@@ -44,14 +44,15 @@ namespace Uppgift4
                     listadminanv.Add(adminanv);
                 }
 
-                //admingrid.DataSource = listadminanv;
-                //admingrid.DataBind();
-
-                
-                DataSet ds = new DataSet();
-
-                admingrid.DataSource = ds;
+                admingrid.DataSource = listadminanv;
                 admingrid.DataBind();
+                
+                
+                
+                //DataSet ds = new DataSet();
+
+                //admingrid.DataSource = ds;
+                //admingrid.DataBind();
 
                 conn.Close();
                     
