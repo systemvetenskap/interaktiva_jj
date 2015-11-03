@@ -48,16 +48,16 @@ namespace Uppgift4
                 //admingrid.DataBind();
 
                 
-                DataSet ds = new DataSet();
+                //DataSet ds = new DataSet();
 
-                admingrid.DataSource = ds;
-                admingrid.DataBind();
-
+                //admingrid.DataSource = ds;
+                //admingrid.DataBind();
+            
                 conn.Close();
                     
 
 
-
+            
         }
         private void sparaDatabas()
         {
