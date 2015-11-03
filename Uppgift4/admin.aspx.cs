@@ -17,59 +17,28 @@ namespace Uppgift4
         DataTable dt = new DataTable();
         NpgsqlDataAdapter da;
         List<AdmAnv> listadminanv = new List<AdmAnv>();
+        AdmAnv akutellanvandare = new AdmAnv();
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
         }
-        private void laddatestare()
+        private void fyllerlista()
         {
-
-            sql = "select * from webbutveckling.anvandare;";
- NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            
+                sql = "select * from webbutveckling.anvandare;";
+                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
                 NpgsqlCommand command;
                 conn.Open();
                 command = new NpgsqlCommand(sql, conn);            
                 NpgsqlDataReader dr = command.ExecuteReader();
 
-                //string anv = null;
-                //string licens = null;
                 while (dr.Read())
-                {
-
-                    //AdmAnv nyanv = new AdmAnv();
-                    //nyanv.anvandarnamn = dr["anvandarnamn"].ToString();
-                    //nyanv.licensiering = dr["licensierad"].ToString();
-                    //nyanv.losenord = dr["losenord"].ToString();
-                    //nyanv.roll = dr["roll"].ToString();
-                    ListItem anvnamn = new ListItem(dr["anvandarnamn"].ToString());
-                    anvnamn.Attributes.Add("Licensierad", dr["licensierad"].ToString());
-                    //listadminanv.Add(nyanv);
-                    //ListBoxAnv.Items.Add
-                    
-                    ListBoxAnv.Items.Add(anvnamn);
-                   
+                {     
+                    ListItem anvnamn = new ListItem(dr["anvandarnamn"].ToString());            
+                    ListBoxAnv.Items.Add(anvnamn);                   
                 }
-               
+                
 
-          
-            //    while (dr.Read())
-            //    {
-            //        Kunder kund = new Kunder();
-            //        kund.namn = dr["namn"].ToString();
-            //        kund.personnr = dr["personnummer"].ToString();
-            //        kund.telefonnr = dr["telefonnummer"].ToString();
-            //        kund.adress = dr["adress"].ToString();
-            //        kund.epost = dr["epost"].ToString();
-            //        listBoxKunder.Items.Add(kund);
-            //    }
-          
-
-
-
-                //admingrid.DataSource = listadminanv;
-                //admingrid.DataBind();
-                //conn.Close();
-            
         }
         private void sparaDatabas()
         {
@@ -86,7 +55,53 @@ namespace Uppgift4
 
         protected void ladda_Click(object sender, EventArgs e)
         {
-            laddatestare();
+            fyllerlista();
+        }
+
+        protected void ListBoxAnv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                akutellanvandare.anvandarnamn = ListBoxAnv.SelectedItem.Text;
+                sql = "select * from webbutveckling.anvandare where anvandarnamn = '" + akutellanvandare.anvandarnamn + "'";
+                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+                NpgsqlCommand command;
+                conn.Open();
+                command = new NpgsqlCommand(sql, conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    anv.Text = dr["anvandarnamn"].ToString();
+                    licensierad.Text = dr["licensierad"].ToString();
+                    roll.Text = dr["roll"].ToString();
+                }
+               
+        }
+        private void hamtaprov()
+        {
+            akutellanvandare.anvandarnamn = ListBoxAnv.SelectedItem.Text;
+            sql = "select * from webbutveckling.test where anvandarnamn = '" + akutellanvandare.anvandarnamn + "'";
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            while (dr.Read())
+            {
+                testtyp.Text = dr["testtyp"].ToString();
+                antek.Text = dr["antalrattekonomi"].ToString();
+                antpr.Text = dr["antalrattprodukter"].ToString();
+                antet.Text = dr["antalrattetik"].ToString();
+                antto.Text = dr["antalratttotal"].ToString();
+                testid.Text = dr["testid"].ToString();
+                procto.Text = dr["procenttotal"].ToString();
+                godkand.Text = dr["godkäntresultat"].ToString();
+
+            }
+        }
+        protected void visaprov_Click(object sender, EventArgs e)
+        {
+            hamtaprov();
         }
     }
 }
