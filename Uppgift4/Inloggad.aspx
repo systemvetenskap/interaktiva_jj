@@ -5,8 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 
-    <link rel="stylesheet" type="text/css" href="Stilmall.css"/>
-    <link rel="stylesheet" type="text/css" href="Responsiv.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="Stilmall1.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="Responsiv.css"/>--%>
     <title></title>
 </head>
 <body>
@@ -51,9 +52,10 @@
                 <asp:Button ID="BtnRatta" runat="server" OnClick="BtnRatta_Click" Text="Rätta" Width="80px" Visible="False" />
             </div>
             <div class="sektion sektion-andra mobil">
-                
-                <asp:GridView ID="GridView2" runat="server" Width="137px"></asp:GridView>
-                <asp:GridView ID="GridView3" runat="server"></asp:GridView>
+                <asp:Label ID="lbl1" runat="server" Text="Dina Svar:" Visible="False"></asp:Label>                
+            </div>
+                <div class="sektion sektion-tredje mobil">
+                <asp:Label ID="lbl2" runat="server" Text="Rätta Svar:" Visible="False"></asp:Label>              
             </div>
 
        </div>   
@@ -65,8 +67,7 @@
                     </h6>
                 <p> </p>
                 </footer>
-            </div>
-</div>
+
     </form>
 </body>
 </html>

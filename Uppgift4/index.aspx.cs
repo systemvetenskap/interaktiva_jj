@@ -39,8 +39,19 @@ namespace Uppgift4
                     pissBool = true;
                     Anvandare.anvandarnamn = TextBox1.Text;
                     Anvandare.licensiering = dr["licensierad"].ToString();
-                    Response.Redirect("~/Inloggad.aspx");                    
+                    Anvandare.roll = dr["roll"].ToString();
+
+                    if (Anvandare.roll == "admin")
+                    {
+                        Response.Redirect("~/admin.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Inloggad.aspx");
+                    }
                 }
+
+                
                 else if (pissBool == false)
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har skrivit fel lösenord')", true); 
             }

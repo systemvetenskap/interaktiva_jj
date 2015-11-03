@@ -64,10 +64,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin.aspx" />
     <Content Include="index.aspx" />
     <Content Include="Inloggad.aspx" />
     <Content Include="Responsiv.css" />
-    <Content Include="Stilmall.css" />
+    <Content Include="Stilmall1.css" />
     <Content Include="Web.config" />
     <Content Include="XMLFragorna.xml">
       <SubType>Designer</SubType>
@@ -78,6 +79,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Anvandare.cs" />
     <Compile Include="FrageKlass.cs" />
     <Compile Include="index.aspx.cs">

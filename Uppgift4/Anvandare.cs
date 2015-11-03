@@ -12,6 +12,7 @@ namespace Uppgift4
         public static string licensiering { get; set; }
         public static string kunskapstest { get; set; }
         public static DateTime datumkunskapstest { get; set; }
-        //public string roll { get; set; }
+        public static string roll { get; set; }
+       
     }
 }
