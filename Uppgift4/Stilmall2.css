@@ -192,7 +192,8 @@ div.sektionAnnat{
 
 
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 750px)
+{
     /*nav ul li{
     width: 100%;
     border-bottom: 0px solid black;
@@ -208,14 +209,35 @@ nav{
 div.container{
     margin: 25px 25px 25px 25px;
 }
-div.sektioner{
+/*div.sektioner{
    margin: 5px 0px 0px 0px;
-
+   float: none;
 }
 div.sektionerna{
     margin: 120px 0px 0px 0px;
+}*/
+.sektion{
+    
+    float: none;    
+    margin-top: 10px;
+    width: 100%;
 }
- }
+.sektion-andra
+{
+    width: 40%;
+    float: none;
+    margin: 10px;
+}
+.sektion-tredje
+{
+    float: none;
+    margin: 10px;
+    width: 40%;
+
+}
+}
+
+
 
 @media screen and (max-width: 400px) {
     div.container {
@@ -242,7 +264,8 @@ div.sektionerna{
 
     div.mobil {
         width: auto;
-        margin-right: 0;
+        float: none;
+        margin: 10px;
     }
 
     .hide-mobile {
