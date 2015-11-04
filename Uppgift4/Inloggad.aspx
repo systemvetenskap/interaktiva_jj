@@ -6,7 +6,7 @@
 <head runat="server">
 
     
-    <link rel="stylesheet" type="text/css" href="Stilmall1.css"/>
+    <link rel="stylesheet" type="text/css" href="Stilmall2.css"/>
     <%--<link rel="stylesheet" type="text/css" href="Responsiv.css"/>--%>
     <title></title>
 </head>

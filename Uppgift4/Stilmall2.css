@@ -121,18 +121,19 @@ nav ul li a {
  
 }
 div.sektioner{
-    float: left;
+
     margin: 20px;
     width: 528px;
 }
 .sektion{
-    width: 40%;
+    
     float: left;    
     margin-top: 10px;
-    color: green;
+    width: 100%;
 }
 .sektion-andra
 {
+    width: 40%;
     float: left;
     margin: 10px;
 }
@@ -141,8 +142,7 @@ div.sektioner{
     float: left;
     margin: 10px;
     width: 40%;
-    color: red;
-    background-color: green
+
 }
 img {
     max-width: 90%;

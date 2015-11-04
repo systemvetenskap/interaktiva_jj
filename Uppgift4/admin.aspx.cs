@@ -13,6 +13,7 @@ namespace Uppgift4
 {
     public partial class admin : System.Web.UI.Page
     {
+     
         string sql;
         DataTable dt = new DataTable();
         NpgsqlDataAdapter da;
@@ -20,7 +21,7 @@ namespace Uppgift4
         AdmAnv akutellanvandare = new AdmAnv();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
         private void fyllerlista()
         {
@@ -52,10 +53,39 @@ namespace Uppgift4
 
             }
         }
+        private void laddatesttyp()
+        {
+            lblkunskap.Text = "Ska göra Kunskapstest(åku)";
+            lbllicens.Text = "Ska göra Licenstest";
+            
+            sql = "select * from webbutveckling.anvandare";
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            while (dr.Read())
+            {
+                string ett = dr["anvandarnamn"].ToString();
+                string tva = dr["licensierad"].ToString();
+
+                if (tva == "ja")
+                {
+                    lblkunskap.Text += "<br />" + ett;
+                }
+                else if (tva == "nej")
+                {
+                    lbllicens.Text += "<br />" + ett;
+                }
+            }
+
+        }
 
         protected void ladda_Click(object sender, EventArgs e)
         {
             fyllerlista();
+            laddatesttyp();
         }
 
         protected void ListBoxAnv_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,6 +134,7 @@ namespace Uppgift4
             try
             {
                 hamtaprov();
+                
             }
             catch
             {

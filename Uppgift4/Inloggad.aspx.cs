@@ -27,7 +27,6 @@ namespace Uppgift4
         int FrageNummer;
         bool licens;
         string licensiering;
-        //för att rättafdsfsd
         XmlNodeList XMLFragorMetodRatta;
         XmlNodeList XMLSvarMetodRatta;
         List<SvarFragor> SvarLista = new List<SvarFragor>();
@@ -43,31 +42,30 @@ namespace Uppgift4
 
             if (Anvandare.licensiering == "ja")
             {
-                lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
+                lblRubrik.Text = "Välkommen till kunskapstestet(ÅKU), " + Anvandare.anvandarnamn;
                 licens = true;
             }
             else
             {
+
+                lblRubrik.Text = "Välkommen till licensieringstestet, " + Anvandare.anvandarnamn;
                 licens = false;
-                lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
             }
-        }
-        private void sattIhop()
-        {
             
-            
-        
         }
+
         private void andraTillLicensierad()
         {
+            sql = "update webbutveckling.anvandare set licensierad = 'ja' where anvandarnamn = '"+Anvandare.anvandarnamn+"';";
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
             NpgsqlCommand command;
             conn.Open();
             command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
-            sql = "update webbutveckling.anvandare set licensierad = 'ja' where anvandarnamn = '"+Anvandare.anvandarnamn+"';";
+            
+            
             sparaDatabas();
-
+            conn.Close();
         }
         private void LasInFraga()
         {
@@ -123,7 +121,15 @@ namespace Uppgift4
             }
          
             labelnummer++;
-
+        
+        }
+        private void sparasql()
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
         }
         private void sparaDatabas()
         {
@@ -456,15 +462,16 @@ namespace Uppgift4
                 if (licens == false)
                 {
 
-                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal +",'ja')";
-                    
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja')";
+                    sparasql();
                     andraTillLicensierad();
-                    sparaDatabas(); 
+                     
                 }
                 if (licens == true)
                 {
 
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja')";
+                    sparasql();
                     sparaDatabas(); 
                 }
 

@@ -68,7 +68,7 @@
     <Content Include="index.aspx" />
     <Content Include="Inloggad.aspx" />
     <Content Include="Responsiv.css" />
-    <Content Include="Stilmall1.css" />
+    <Content Include="Stilmall2.css" />
     <Content Include="Web.config" />
     <Content Include="XMLFragorna.xml">
       <SubType>Designer</SubType>

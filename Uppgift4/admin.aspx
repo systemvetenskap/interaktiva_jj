@@ -6,7 +6,7 @@
 <head runat="server">
 
     
-    <link rel="stylesheet" type="text/css" href="Stilmall1.css"/>
+    <link rel="stylesheet" type="text/css" href="Stilmall2.css"/>
     
     <title></title>
 </head>
@@ -33,7 +33,13 @@
        
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <asp:ListBox ID="ListBoxAnv" runat="server" Width="199px" AutoPostBack="True" OnSelectedIndexChanged="ListBoxAnv_SelectedIndexChanged"></asp:ListBox>
+                <asp:Label ID="lbllicens" runat="server" Text="Ska göra Licenstest"></asp:Label>
+                <br />
+                <asp:Label ID="lblkunskap" runat="server" Text="Ska göra Kunskapstest"></asp:Label>
+            </div>
+            <div class="sektion sektion-andra mobil">
+               
+                 <asp:ListBox ID="ListBoxAnv" runat="server" Width="199px" AutoPostBack="True" OnSelectedIndexChanged="ListBoxAnv_SelectedIndexChanged"></asp:ListBox>
                  <br />
                 Användarnamn:
                 <asp:TextBox ID="anv" runat="server" Width="69px"></asp:TextBox>
@@ -46,10 +52,6 @@
                  <br />
               <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
               <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" />
-            </div>
-            <div class="sektion sektion-andra mobil">
-               
- 
             </div>
            
                 <div class="sektion sektion-tredje mobil">
