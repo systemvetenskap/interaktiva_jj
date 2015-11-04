@@ -35,8 +35,8 @@ namespace Uppgift4
         {
 
             ////ta bort, bara för att inlogg inte funkar för mig
-            //Anvandare.anvandarnamn = "1";
-            //Anvandare.licensiering = "nej";
+            Anvandare.anvandarnamn = "1";
+            Anvandare.licensiering = "nej";
             ////hit
 
 
