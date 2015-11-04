@@ -27,7 +27,6 @@ namespace Uppgift4
         int FrageNummer;
         bool licens;
         string licensiering;
-        //för att rättafdsfsd
         XmlNodeList XMLFragorMetodRatta;
         XmlNodeList XMLSvarMetodRatta;
         List<SvarFragor> SvarLista = new List<SvarFragor>();
@@ -43,87 +42,160 @@ namespace Uppgift4
 
             if (Anvandare.licensiering == "ja")
             {
-                lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
+                lblRubrik.Text = "Välkommen till kunskapstestet(ÅKU), " + Anvandare.anvandarnamn;
                 licens = true;
             }
             else
             {
+
+                lblRubrik.Text = "Välkommen till licensieringstestet, " + Anvandare.anvandarnamn;
                 licens = false;
-                lblRubrik.Text = "Välkommen till testet " + Anvandare.anvandarnamn;
+            }
+            
+        }
+
+        private void andraTillLicensierad()
+        {
+            sql = "update webbutveckling.anvandare set licensierad = 'ja' where anvandarnamn = '"+Anvandare.anvandarnamn+"';";
+            NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            NpgsqlCommand command;
+            conn.Open();
+            command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            
+            
+            sparaDatabas();
+            conn.Close();
+        }
+        private void LasInFraga()
+        {
+            //sql = "select * from webbutveckling.test where anvandarnamn ='"+ Anvandare.anvandarnamn +"' and dagensdatum < now()::date -365 and godkäntresultat ='ja'order by dagensdatum desc limit 1";
+            //NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+            //NpgsqlCommand command;
+            //conn.Open();
+            //command = new NpgsqlCommand(sql, conn);
+            //NpgsqlDataReader dr = command.ExecuteReader();
+            //string testet = null;
+            //while (dr.Read())
+            //{
+            //    testet = dr["dagensdatum"].ToString();
+            //}
+
+            bool ingettest = false;
+
+            DateTime date1;
+            if (licens == false)
+            {
+                ingettest = false;
+                XMLFragorna = Server.MapPath("XMLFragorna.xml");
+
+            }
+            if (licens == true)
+            {
+                sql = "select * from webbutveckling.test where anvandarnamn ='" + Anvandare.anvandarnamn + "' and testtyp = 'kunskap' or testtyp = 'licens' and godkäntresultat ='ja'order by dagensdatum desc limit 1";
+                NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
+                NpgsqlCommand command;
+                conn.Open();
+                command = new NpgsqlCommand(sql, conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    DateTime.TryParse(dr["dagensdatum"].ToString(), out date1);
+                    DateTime dagensdatum365 = date1.AddDays(-365);
+                    DateTime dagensdatum = DateTime.Today;
+                    TimeSpan duration = dagensdatum - date1;
+
+                    if (duration.Days > 365)
+                    {
+                        ingettest = false;
+                        XMLFragorna = Server.MapPath("XMLKunskapstest.xml");
+                    }
+                    if (duration.Days < 365)
+                    {
+                        ingettest = true;
+                    }
+                }
+            }
+            if (ingettest == false)
+            {
+                RadioButtonList1.SelectedIndex = -1;
+                LabelNummer.Text = Convert.ToString(FrageNummer);
+
+
+                aktieNodeListFragor = docFra.SelectNodes("/fragor/fraga");
+                if (XMLFragorna != null)
+                {
+                    docFra.Load(XMLFragorna);
+
+                    int labelnummer = 0;
+                    string fragansNummer = Convert.ToString(FrageNummer);
+                    foreach (XmlNode nod in aktieNodeListFragor)
+                    {
+                        FrageKlass fraga = new FrageKlass();
+                        fraga.nummer = nod["nummer"].InnerText;
+                        fraga.fragan = nod["fragan"].InnerText;
+                        fraga.a = nod["a"].InnerText;
+                        fraga.b = nod["b"].InnerText;
+                        fraga.c = nod["c"].InnerText;
+                        fraga.Kategori = nod["Kategori"].InnerText;
+                        frageLista.Add(fraga);
+
+                        if (fragansNummer == FrageNummer.ToString() && fraga.nummer == FrageNummer.ToString())
+                        {
+
+                            frageLista.Add(fraga);
+                            kategori = null;
+                            LabelFraga.Text = ": " + frageLista[FrageNummer].fragan;
+                            RadioButtonList1.Items.FindByValue("A").Text = frageLista[FrageNummer].a;
+                            RadioButtonList1.Items.FindByValue("B").Text = frageLista[FrageNummer].b;
+                            RadioButtonList1.Items.FindByValue("C").Text = frageLista[FrageNummer].c;
+                            lblKategori.Text = frageLista[FrageNummer].Kategori;
+
+
+                        }
+                        else if (FrageNummer == 5)
+                        {
+                            LabelFraga.Text = "Slut på frågor";
+                            BtnNasta.Visible = false;
+                            LabelNummer.Visible = false;
+                            RadioButtonList1.Visible = false;
+                            BtnRatta.Visible = true;
+                        }
+                    }
+
+                    labelnummer++;
+                }
+
+
+
+                else
+                {
+                    LabelFraga.Text = "Du har gjort testet";
+                    BtnNasta.Visible = false;
+                    LabelNummer.Visible = false;
+                    RadioButtonList1.Visible = false;
+                    BtnRatta.Visible = false;
+                }
+                
+            }
+            else
+            {
+                LabelFraga.Text = "Du har gjort testet";
+                BtnNasta.Visible = false;
+                LabelNummer.Visible = false;
+                RadioButtonList1.Visible = false;
+                BtnRatta.Visible = false;
             }
         }
-        private void sattIhop()
-        {
-            
-            
-        
-        }
-        private void andraTillLicensierad()
+
+        private void sparasql()
         {
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
             NpgsqlCommand command;
             conn.Open();
             command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
-            sql = "update webbutveckling.anvandare set licensierad = 'ja' where anvandarnamn = '"+Anvandare.anvandarnamn+"';";
-            sparaDatabas();
-
-        }
-        private void LasInFraga()
-        {
-            if (licens == false)
-            {
-                XMLFragorna = Server.MapPath("XMLFragorna.xml");
-            }
-            else
-            {
-                XMLFragorna = Server.MapPath("XMLKunskapstest.xml");
-            }
-
-            RadioButtonList1.SelectedIndex = -1;
-            LabelNummer.Text = Convert.ToString(FrageNummer);
-            
-
-            aktieNodeListFragor = docFra.SelectNodes("/fragor/fraga");
-            docFra.Load(XMLFragorna);
-            int labelnummer = 0;
-            string fragansNummer = Convert.ToString(FrageNummer);
-            foreach (XmlNode nod in aktieNodeListFragor)
-            {
-                FrageKlass fraga = new FrageKlass();
-                fraga.nummer = nod["nummer"].InnerText;
-                fraga.fragan = nod["fragan"].InnerText;
-                fraga.a = nod["a"].InnerText;
-                fraga.b = nod["b"].InnerText;
-                fraga.c = nod["c"].InnerText;
-                fraga.Kategori = nod["Kategori"].InnerText;
-                frageLista.Add(fraga);
-
-                if (fragansNummer == FrageNummer.ToString() && fraga.nummer == FrageNummer.ToString())
-                {
-                        
-                        frageLista.Add(fraga);
-                        kategori = null;
-                        LabelFraga.Text = ": " + frageLista[FrageNummer].fragan;
-                        RadioButtonList1.Items.FindByValue("A").Text = frageLista[FrageNummer].a;
-                        RadioButtonList1.Items.FindByValue("B").Text = frageLista[FrageNummer].b;
-                        RadioButtonList1.Items.FindByValue("C").Text = frageLista[FrageNummer].c;
-                        lblKategori.Text = frageLista[FrageNummer].Kategori;
-                        
-                    
-                }
-                else if (FrageNummer == 5)
-                {
-                    LabelFraga.Text = "Slut på frågor";
-                    BtnNasta.Visible = false;
-                    LabelNummer.Visible = false;
-                    RadioButtonList1.Visible = false;
-                    BtnRatta.Visible = true;
-                }            
-            }
-         
-            labelnummer++;
-
         }
         private void sparaDatabas()
         {
@@ -438,14 +510,14 @@ namespace Uppgift4
                 if (licens == false)
                 {
 
-                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej')";
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
                     
                 }
                 if (licens == true)
                 {
 
 
-                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej')";
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
 
                 }
             }
@@ -456,15 +528,16 @@ namespace Uppgift4
                 if (licens == false)
                 {
 
-                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal +",'ja')";
-                    
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja', now())";
+                    sparasql();
                     andraTillLicensierad();
-                    sparaDatabas(); 
+                     
                 }
                 if (licens == true)
                 {
 
-                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja')";
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'ja', now())";
+                    sparasql();
                     sparaDatabas(); 
                 }
 
@@ -496,6 +569,7 @@ namespace Uppgift4
                 }
                 lbl1.Visible = true;
                 lbl2.Visible = true;
+        
         }
             
         protected void BtnForegaende_Click(object sender, EventArgs e)
