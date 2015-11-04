@@ -57,8 +57,8 @@ namespace Uppgift4
         {
             lblkunskap.Text = "Ska göra Kunskapstest(åku)";
             lbllicens.Text = "Ska göra Licenstest";
-            
-            sql = "select * from webbutveckling.anvandare";
+
+            sql = "select * from webbutveckling.anvandare join webbutveckling.test on anvandare.anvandarnamn = test.anvandarnamn;";
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
             NpgsqlCommand command;
             conn.Open();
@@ -69,10 +69,11 @@ namespace Uppgift4
             {
                 string ett = dr["anvandarnamn"].ToString();
                 string tva = dr["licensierad"].ToString();
+                string tre = dr["dagensdatum"].ToString();
 
                 if (tva == "ja")
                 {
-                    lblkunskap.Text += "<br />" + ett;
+                    lblkunskap.Text += "<br />" + ett + " senaste prov: " + tre;
                 }
                 else if (tva == "nej")
                 {

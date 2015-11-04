@@ -55,39 +55,22 @@
             </div>
            
                 <div class="sektion sektion-tredje mobil">
-                testtyp:
-                <asp:TextBox ID="testtyp" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                antalrätt ekonomi:
-                <asp:TextBox ID="antek" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                    antalrätt produkter:
-                <asp:TextBox ID="antpr" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                    antalrätt etik:
-                <asp:TextBox ID="antet" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                    antalrätt total:
-                <asp:TextBox ID="antto" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                    testid:
-                <asp:TextBox ID="testid" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                                        procenttotal:
-                <asp:TextBox ID="procto" runat="server" Width="69px"></asp:TextBox>
-                 <br />
-                                        Godkänd?:
-                <asp:TextBox ID="godkand" runat="server" Width="69px"></asp:TextBox>
-                 <br />
+                <p>Testtyp:<asp:TextBox ID="testtyp" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Antalrätt ekonomi:<asp:TextBox ID="antek" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Antalrätt produkter:<asp:TextBox ID="antpr" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Antalrätt etik<asp:TextBox ID="antet" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Antalrätt total:<asp:TextBox ID="antto" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Testid<asp:TextBox ID="testid" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Procenttotal:<asp:TextBox ID="procto" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Godkänt resultat:<asp:TextBox ID="godkand" runat="server" Width="69px"></asp:TextBox></p>
+                 
             </div>
 
        </div>   
 </div>
             <footer>      
-                <h6>
-                     Hej  <br>
-                    å Hå
-                    </h6>
+               <p>  JE-Bankens Licenstester <br />
+                Skapad av Johan Eklund och Joachim Hörsell</p>
                 
                 </footer>
 

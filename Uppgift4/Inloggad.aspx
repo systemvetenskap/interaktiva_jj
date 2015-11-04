@@ -61,11 +61,9 @@
        </div>   
 </div>
             <footer>      
-                <h6>
-                     Hej  <br>
-                    å Hå
-                    </h6>
-                <p> </p>
+               <p>  JE-Bankens Licenstester <br />
+                Skapad av Johan Eklund och Joachim Hörsell</p>
+                
                 </footer>
 
     </form>
