@@ -34,8 +34,8 @@ namespace Uppgift4
         {
 
             ////ta bort, bara för att inlogg inte funkar för mig
-            Anvandare.anvandarnamn = "1";
-            Anvandare.licensiering = "nej";
+            //Anvandare.anvandarnamn = "1";
+            //Anvandare.licensiering = "nej";
             ////hit
 
 
@@ -92,7 +92,7 @@ namespace Uppgift4
             }
             if (licens == true)
             {
-                sql = "select * from webbutveckling.test where anvandarnamn ='" + Anvandare.anvandarnamn + "' and testtyp = 'kunskap' or testtyp = 'licens' and godkäntresultat ='ja'order by dagensdatum desc limit 1";
+                sql = "select * from webbutveckling.test where anvandarnamn ='" + Anvandare.anvandarnamn + "' and godkäntresultat ='ja'order by dagensdatum desc limit 1";
                 NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
                 NpgsqlCommand command;
                 conn.Open();
@@ -509,16 +509,13 @@ namespace Uppgift4
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
                 if (licens == false)
                 {
-
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
-                    
+                    sparasql();
                 }
                 if (licens == true)
                 {
-
-
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
-
+                    sparasql();
                 }
             }
             if (procentTotalDec > SjuttioProcent&& procentEtikDec>SextioProcent&&procentEkonomiDec>SextioProcent&&procentProduktDec>SextioProcent)

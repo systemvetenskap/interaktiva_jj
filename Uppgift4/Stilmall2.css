@@ -6,13 +6,18 @@ background-image: url("http://wallpaper.pickywallpapers.com/1600x900/simple-clea
 h1{
     font-weight: 400;
 }
+p{
+    padding: 0;
+    margin: 0px 100px 0px 0px;
+}
+.button input[type="button"]{
+    margin: 0px 0px 0px 100px;
+    background-color: red;
+}
 a{
     font-weight: 600;
 }
-p{
-   font-family: 'Times New Roman';
-   font-weight: 300;
-}
+
 
 header{
       width: 200px;
@@ -116,33 +121,38 @@ nav ul li a {
 }
 .body{
 
-    
     height: auto;
  
 }
+
 div.sektioner{
 
     margin: 20px;
-    width: 528px;
+    width: 100%;
 }
 .sektion{
     
     float: left;    
     margin-top: 10px;
-    width: 100%;
+    width: 33%;
 }
 .sektion-andra
 {
-    width: 40%;
+    width: 33%;
     float: left;
-    margin: 10px;
+    
 }
 .sektion-tredje
 {
-    float: left;
-    margin: 10px;
-    width: 40%;
+    float: left;    
+    width: 33%;
 
+}
+/*input#testtyp{
+ border:2px solid #456879;
+ border-radius:10px;
+ height: 22px;
+ width: 230px;*/
 }
 img {
     max-width: 90%;
@@ -161,15 +171,14 @@ div.body{
 }
 footer{
     
-    background-color:#ebe7e7; 
-    color: black;
-    text-align: left;
-    height: 40px;
-
-     
+    background-color: #1f1e1e;
+    color: #808080;
+    text-align: center;
+    height: 40px;   
+    text-shadow: 5px;
 }
 footer p{
-   text-align: right;  
+   
 }
 
 /*div.sektionerna{
