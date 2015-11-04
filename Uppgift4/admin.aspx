@@ -44,18 +44,19 @@
                 Roll:
                 <asp:TextBox ID="roll" runat="server" Width="69px"></asp:TextBox>
                  <br />
+              <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
+              <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" />
             </div>
             <div class="sektion sektion-andra mobil">
                
-              <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
-              <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" />
+ 
             </div>
            
                 <div class="sektion sektion-tredje mobil">
                 testtyp:
                 <asp:TextBox ID="testtyp" runat="server" Width="69px"></asp:TextBox>
                  <br />
-                                    antalrätt ekonomi:
+                antalrätt ekonomi:
                 <asp:TextBox ID="antek" runat="server" Width="69px"></asp:TextBox>
                  <br />
                                     antalrätt produkter:
@@ -85,7 +86,7 @@
                      Hej  <br>
                     å Hå
                     </h6>
-                <p> </p>
+                
                 </footer>
 
     </form>

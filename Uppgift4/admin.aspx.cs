@@ -101,7 +101,15 @@ namespace Uppgift4
         }
         protected void visaprov_Click(object sender, EventArgs e)
         {
-            hamtaprov();
+            try
+            {
+                hamtaprov();
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }
