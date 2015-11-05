@@ -25,6 +25,7 @@ namespace Uppgift4
 
         protected void BtnLoggain_Click(object sender, EventArgs e)
         {
+
             //Kollainlogg(); 
             if (TextBox1.Text != "" && TextBox2.Text != "")
             {

@@ -17,14 +17,8 @@
 </header>
         <nav>
                 <ul class="clearfix">
-                    <li><a href="kompetens1.html">Hem</a></li>
-                    <li><a href="">Saker</a>
-                     <ul>
-                       <li><a href="kompetens2.html">Något</a></li>
-                        <li><a href="">Annat</a></li>
-            
-                        </ul>            </li> 
-                    <li><a href="">Om oss</a></li>                       
+                    <li><a href="Inloggad.aspx">Hem</a></li>
+                    <li><a href="index.aspx">Logga ut</a></li>                
                 </ul>            
        </nav>
     <div class="body">
@@ -49,10 +43,10 @@
             </asp:RadioButtonList>
             
                 <asp:CheckBoxList ID="CheckBoxList1" runat="server" Visible="False">
-                <asp:ListItem  Value="A" Text="alla"></asp:ListItem>
-                <asp:ListItem  Value="B" Text="ni"></asp:ListItem>
-                <asp:ListItem  Value="C" Text="du"></asp:ListItem>
-                <asp:ListItem  Value="D" Text="jag"></asp:ListItem>
+                
+                <asp:ListItem  Value="A" Text="ni"></asp:ListItem>
+                <asp:ListItem  Value="B" Text="du"></asp:ListItem>
+                <asp:ListItem  Value="C" Text="jag"></asp:ListItem>
                 </asp:CheckBoxList>
             <asp:Button ID="BtnForegaende" runat="server" Text="Föregående" OnClick="BtnForegaende_Click" Visible="False" Width="80px" />
                 <asp:Button ID="BtnNasta" runat="server" Text="Nästa" OnClick="BtnNasta_Click" Visible="False" Width="80px" />
@@ -60,7 +54,7 @@
             </div>
             <div class="sektion sektion-andra mobil">
                 <asp:Label ID="lbl1" runat="server" Text="Dina Svar:" Visible="False"></asp:Label> 
-                <asp:Image id="bilden" runat="server" src="http://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com" hidden="hidden"></asp:Image> 
+                <asp:Image id="bilden" runat="server" src="http://www.so-rummet.se/sites/default/files/category_pictures/Religion_etik_moral.gif" alt="W3Schools.com"></asp:Image> 
             </div>
                 <div class="sektion sektion-tredje mobil">
                 <asp:Label ID="lbl2" runat="server" Text="Rätta Svar:" Visible="False"></asp:Label>              

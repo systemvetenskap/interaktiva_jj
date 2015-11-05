@@ -9,6 +9,7 @@
     <b>Jag</b>
     <c>Kung sverige</c>
     <RattSvar>Kung sverige</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Produkter och hantering av kundens affärer</Kategori>
     <test>kunskap</test>
   </fraga>
@@ -21,8 +22,10 @@
     <b>Kungen</b>
     <c>Joachim</c>
     <RattSvar>Joachim</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi</Kategori>
     <test>kunskap</test>
+    
   </fraga>
 
 
@@ -34,20 +37,91 @@
     <b>jag</b>
     <c>du</c>
     <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Etik och regelverk.</Kategori>
     <test>kunskap</test>
   </fraga>
 
   <fraga>
     <nummer>4</nummer>
-    <fragan>Vad fan är etik?</fragan>
+    <fragan>Vad äääär etik? Välj två alternativ!</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c> 
+    <RattSvar>du</RattSvar>
+    <RattSvar2>jag</RattSvar2>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>kunskap</test>
+  </fraga>
+  <fraga>
+    <nummer>5</nummer>
+    <fragan>Vem är jag?</fragan>
     <a>ni</a>
     <b>jag</b>
     <c>du</c>
     <RattSvar>du</RattSvar>
-    <Kategori>Etik och regelverk.</Kategori>
-    <test>kunskap</test>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Produkter och hantering av kundens affärer</Kategori>
+    <test>licens</test>
   </fraga>
 
+  <fraga>
+    <nummer>6</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi</Kategori>
+    <test>licens</test>
+  </fraga>
+
+  <fraga>
+    <nummer>7</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>licens</test>
+  </fraga>
+
+  <fraga>
+    <nummer>8</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Produkter och hantering av kundens affärer</Kategori>
+    <test>licens</test>
+  </fraga>
+
+  <fraga>
+    <nummer>9</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi</Kategori>
+    <test>licens</test>
+  </fraga>
+  <fraga>
+    <nummer>10</nummer>
+    <fragan>Vem är jag?</fragan>
+    <a>ni</a>
+    <b>jag</b>
+    <c>du</c>
+    <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
+    <Kategori>Etik och regelverk.</Kategori>
+    <test>licens</test>
+  </fraga>
 
 </fragor>

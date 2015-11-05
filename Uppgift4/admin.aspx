@@ -17,15 +17,10 @@
 </header>
         <nav>
                 <ul class="clearfix">
-                    <li><a href="kompetens1.html">Hem</a></li>
-                    <li><a href="">Saker</a>
-                     <ul>
-                       <li><a href="kompetens2.html">Något</a></li>
-                        <li><a href="">Annat</a></li>
-            
-                        </ul>            </li> 
-                    <li><a href="">Om oss</a></li>                       
-                </ul>            
+                    <li><a href="admin.aspx">Hem</a></li>
+                    <li><a href="Inloggad.aspx">Test</a></li>   
+                    <li><a href="index.aspx">Logga ut</a></li>                   
+                </ul>          
        </nav>
     <div class="body">
 
@@ -51,18 +46,18 @@
                 <asp:TextBox ID="roll" runat="server" Width="69px"></asp:TextBox>
                  <br />
               <asp:Button ID="ladda" runat="server" Text="Visa personal" OnClick="ladda_Click" /> 
-              <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" />
+              <asp:Button ID="visaprov" runat="server" Text="Visa Senaste Prov" OnClick="visaprov_Click" Visible="False" />
             </div>
            
                 <div class="sektion sektion-tredje mobil">
-                <p>Testtyp:<asp:TextBox ID="testtyp" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Antalrätt ekonomi:<asp:TextBox ID="antek" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Antalrätt produkter:<asp:TextBox ID="antpr" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Antalrätt etik<asp:TextBox ID="antet" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Antalrätt total:<asp:TextBox ID="antto" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Testid<asp:TextBox ID="testid" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Procenttotal:<asp:TextBox ID="procto" runat="server" Width="69px"></asp:TextBox></p>
-                <p>Godkänt resultat:<asp:TextBox ID="godkand" runat="server" Width="69px"></asp:TextBox></p>
+                <p>Testtyp:<asp:TextBox ID="testtyp" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt ekonomi:<asp:TextBox ID="antek" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt produkter:<asp:TextBox ID="antpr" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt etik<asp:TextBox ID="antet" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt total:<asp:TextBox ID="antto" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Datum<asp:TextBox ID="testid" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Procenttotal:<asp:TextBox ID="procto" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Godkänt resultat:<asp:TextBox ID="godkand" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
                  
             </div>
 

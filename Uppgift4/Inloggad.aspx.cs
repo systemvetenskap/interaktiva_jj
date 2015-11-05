@@ -38,7 +38,7 @@ namespace Uppgift4
             //Anvandare.licensiering = "nej";
             ////hit
 
-
+            bilden.Visible = false;
 
             if (Anvandare.licensiering == "ja")
             {
@@ -74,10 +74,11 @@ namespace Uppgift4
                 
                 RadioButtonList1.Visible = false;
                 CheckBoxList1.Visible = true;
-                
+                bilden.Visible = true;
             }
             else
             {
+                bilden.Visible = false;
                 CheckBoxList1.Visible = false;
                 RadioButtonList1.Visible = true;
             }
@@ -151,12 +152,21 @@ namespace Uppgift4
                             RadioButtonList1.Items.FindByValue("B").Text = frageLista[FrageNummer].b;
                             RadioButtonList1.Items.FindByValue("C").Text = frageLista[FrageNummer].c;
                             lblKategori.Text = frageLista[FrageNummer].Kategori;
-
-
                         }
-                        else if (FrageNummer == 5)
+
+                        if (FrageNummer == 16 && licens == false)
                         {
                             LabelFraga.Text = "Slut på frågor";
+                            lblKategori.Text = "";
+                            BtnNasta.Visible = false;
+                            LabelNummer.Visible = false;
+                            RadioButtonList1.Visible = false;
+                            BtnRatta.Visible = true;
+                        }
+                        if (FrageNummer == 11 && licens == true)
+                        {
+                            LabelFraga.Text = "Slut på frågor";
+                            lblKategori.Text = "";
                             BtnNasta.Visible = false;
                             LabelNummer.Visible = false;
                             RadioButtonList1.Visible = false;
@@ -622,9 +632,9 @@ namespace Uppgift4
                 string formprocentProduktDec = procentProduktDec.ToString("0.00%");
      
 
-            if (procentTotalDec < SjuttioProcent)
+            if (procentTotalDec <= SjuttioProcent)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har för många fel, försök igen.')", true);
                 if (licens == false)
                 {
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
@@ -636,9 +646,9 @@ namespace Uppgift4
                     sparasql();
                 }
             }
-            if (procentTotalDec > SjuttioProcent&& procentEtikDec>SextioProcent&&procentEkonomiDec>SextioProcent&&procentProduktDec>SextioProcent)
+            if (procentTotalDec >= SjuttioProcent&& procentEtikDec>=SextioProcent&&procentEkonomiDec>=SextioProcent&&procentProduktDec>=SextioProcent)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkännt resultat')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har ett godkänt resultat')", true);
 
                 if (licens == false)
                 {
@@ -659,7 +669,7 @@ namespace Uppgift4
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Du har för många fel, försök igen.')", true);
                 if (licens == false)
                 {
                     sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
@@ -797,7 +807,8 @@ namespace Uppgift4
         {
             rattaProv();
             raderaXMLspara();
-            BtnRatta.Visible = false;           
+            BtnRatta.Visible = false;
+            LabelFraga.Visible = false;
         }
 
     }
