@@ -64,6 +64,7 @@ namespace Uppgift4
             conn.Open();
             command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
+           
 
             while (dr.Read())
             {
