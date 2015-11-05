@@ -69,20 +69,20 @@ namespace Uppgift4
         }
         private void LasInFraga()
         {
-            //sql = "select * from webbutveckling.test where anvandarnamn ='"+ Anvandare.anvandarnamn +"' and dagensdatum < now()::date -365 and godkäntresultat ='ja'order by dagensdatum desc limit 1";
-            //NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
-            //NpgsqlCommand command;
-            //conn.Open();
-            //command = new NpgsqlCommand(sql, conn);
-            //NpgsqlDataReader dr = command.ExecuteReader();
-            //string testet = null;
-            //while (dr.Read())
-            //{
-            //    testet = dr["dagensdatum"].ToString();
-            //}
+            if(LabelNummer.Text == "3")
+            {
+                
+                RadioButtonList1.Visible = false;
+                CheckBoxList1.Visible = true;
+                
+            }
+            else
+            {
+                CheckBoxList1.Visible = false;
+                RadioButtonList1.Visible = true;
+            }
 
             bool ingettest = false;
-
             DateTime date1;
             if (licens == false)
             {
@@ -221,30 +221,79 @@ namespace Uppgift4
             docX.Load(Server.MapPath("XMLspara.xml"));
             System.Xml.XmlNode xmlNode = docX.DocumentElement.FirstChild;
             //skapa fixa så skapas klass sen
-
-            System.Xml.XmlElement xmlElement = docX.CreateElement("fraga");
-            xmlElement.SetAttribute("nummer", hej);
-            xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
-            xmlElement.SetAttribute("mittSvar", RadioButtonList1.SelectedItem.Text);
-            xmlElement.SetAttribute("Kategori", lblKategori.Text);
-            //xmlElement.SetAttribute("frågan", LabelFraga.Text);//testar
-
-            if (licens == false)
+            string hej2 = "hej";
+            if (LabelNummer.Text == "4")
             {
-                xmlElement.SetAttribute("test", "licens");
-            }
-            else
-            {
-                xmlElement.SetAttribute("test", "kunskap");
-            }
-            //inseet
-            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
-            docX.Save(Server.MapPath("XMLspara.xml"));
 
-            //TextBox1.Text = "";
-            RadioButtonList1.SelectedIndex = 0;
-            BindData();
-            
+
+                System.Xml.XmlElement xmlElement = docX.CreateElement("fraga");
+                xmlElement.SetAttribute("nummer", hej);
+                xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+
+                for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+                {
+                    if (CheckBoxList1.Items[i].Selected)
+                    {
+                        if(hej2 == "hej")
+                        {
+                            hej2 = "hejdå";
+                            xmlElement.SetAttribute("mittSvar", CheckBoxList1.Items[i].Text);
+                        }
+                        else
+                        {
+                            xmlElement.SetAttribute("mittSvar2", CheckBoxList1.Items[i].Text);
+                        }
+                        
+                    }
+                }
+                //xmlElement.SetAttribute("mittSvar", CheckBoxList1.SelectedItem.Text);
+                //xmlElement.SetAttribute("mittSvar2", CheckBoxList1.SelectedItem.Text);
+                xmlElement.SetAttribute("Kategori", lblKategori.Text);
+                if (licens == false)
+                {
+                    xmlElement.SetAttribute("test", "licens");
+                }
+                else
+                {
+                    xmlElement.SetAttribute("test", "kunskap");
+                }
+                //inseet
+                docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                docX.Save(Server.MapPath("XMLspara.xml"));
+
+                //TextBox1.Text = "";
+                RadioButtonList1.SelectedIndex = 0;
+                BindData();
+            }
+            if (LabelNummer.Text != "4")
+            {
+
+                System.Xml.XmlElement xmlElement = docX.CreateElement("fraga");
+                xmlElement.SetAttribute("nummer", hej);
+                xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+                xmlElement.SetAttribute("mittSvar", RadioButtonList1.SelectedItem.Text);
+                xmlElement.SetAttribute("mittSvar2", "tom");
+                xmlElement.SetAttribute("Kategori", lblKategori.Text);
+
+
+                //xmlElement.SetAttribute("frågan", LabelFraga.Text);//testar
+
+                if (licens == false)
+                {
+                    xmlElement.SetAttribute("test", "licens");
+                }
+                else
+                {
+                    xmlElement.SetAttribute("test", "kunskap");
+                }
+                //inseet
+                docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                docX.Save(Server.MapPath("XMLspara.xml"));
+
+                //TextBox1.Text = "";
+                RadioButtonList1.SelectedIndex = 0;
+                BindData();
+            }
         }
 
         private void raderaXMLspara()
@@ -336,6 +385,7 @@ namespace Uppgift4
                 fraga.RattSvar = nod["RattSvar"].InnerText;
                 fraga.Kategori = nod["Kategori"].InnerText;
                 fraga.test = nod["test"].InnerText;
+                fraga.RattSvar2 = nod["RattSvar2"].InnerText;
                 frageLista.Add(fraga);
             }
 
@@ -358,6 +408,7 @@ namespace Uppgift4
                 svar.nummer = nod.Attributes["nummer"].Value;
                 svar.namn = nod.Attributes["namn"].Value;
                 svar.mittSvar = nod.Attributes["mittSvar"].Value;
+                svar.mittSvar2 = nod.Attributes["mittSvar2"].Value;
                 svar.Kategori = nod.Attributes["Kategori"].Value;
                 svar.test = nod.Attributes["test"].Value;
 
@@ -374,81 +425,164 @@ namespace Uppgift4
             {
                 if (SvarLista[i].nummer == frageLista[i].nummer)
                 {
-                    if (SvarLista[i].mittSvar == frageLista[i].RattSvar)
+                    if(frageLista[i].nummer != "4")
                     {
-                        
-                        System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
-                        xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
-                        xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
-                        xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar); //i.ToString());
-                        xmlElement.SetAttribute("ratt", "ja");
-                        xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
-                        //xmlElement.SetAttribute("frågan", LabelFraga.Text);
-
-
-                        if (licens == false)
+                        if (SvarLista[i].mittSvar == frageLista[i].RattSvar)
                         {
-                            xmlElement.SetAttribute("test", "licens");
-                        }
-                        if (licens == true)
-                        {
-                            xmlElement.SetAttribute("test", "kunskap");
-                        }
+
+                            System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
+                            xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
+                            xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+                            xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar); //i.ToString());
+                            xmlElement.SetAttribute("ratt", "ja");
+                            xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+                            //xmlElement.SetAttribute("frågan", LabelFraga.Text);
 
 
-                        if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
-                        {
-                            antalrattekonomi++;
-                            antalFragorEkonomi++;
-                        }
-                        if (SvarLista[i].Kategori == "Etik och regelverk.")
-                        {
-                            antalrattetik++;
-                            antalFragorEtik++;
-                        }
-                        if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
-                        {
-                            antalrattprodukter++;
-                            antalFragorProdukter++;
-                        }
-                        docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
-                        docX.Save(Server.MapPath("XMLspara.xml"));
-                        totalrattSvar++;
+                            if (licens == false)
+                            {
+                                xmlElement.SetAttribute("test", "licens");
+                            }
+                            if (licens == true)
+                            {
+                                xmlElement.SetAttribute("test", "kunskap");
+                            }
 
 
+                            if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                            {
+                                antalrattekonomi++;
+                                antalFragorEkonomi++;
+                            }
+                            if (SvarLista[i].Kategori == "Etik och regelverk.")
+                            {
+                                antalrattetik++;
+                                antalFragorEtik++;
+                            }
+                            if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                            {
+                                antalrattprodukter++;
+                                antalFragorProdukter++;
+                            }
+                            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                            docX.Save(Server.MapPath("XMLspara.xml"));
+                            totalrattSvar++;
+
+
+                        }
+                        if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
+                        {
+                            System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
+                            xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
+                            xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+                            xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar);//i.ToString());
+                            xmlElement.SetAttribute("ratt", "nej");
+                            xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+                            if (licens == false)
+                            {
+                                xmlElement.SetAttribute("test", "licens");
+                            }
+                            if (licens == true)
+                            {
+                                xmlElement.SetAttribute("test", "kunskap");
+                            }
+
+                            if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                            {
+                                antalFragorEkonomi++;
+                            }
+                            if (SvarLista[i].Kategori == "Etik och regelverk.")
+                            {
+                                antalFragorEtik++;
+                            }
+                            if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                            {
+                                antalFragorProdukter++;
+                            }
+                            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                            docX.Save(Server.MapPath("XMLspara.xml"));
+                        }    
                     }
-                    if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
+                    if (frageLista[i].nummer == "4")
                     {
-                        System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
-                        xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
-                        xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
-                        xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar);//i.ToString());
-                        xmlElement.SetAttribute("ratt", "nej");
-                        xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
-                        if (licens == false)
+                        if (SvarLista[i].mittSvar == frageLista[i].RattSvar && SvarLista[i].mittSvar2 == frageLista[i].RattSvar2)
                         {
-                            xmlElement.SetAttribute("test", "licens");
-                        }
-                        if (licens == true)
-                        {
-                            xmlElement.SetAttribute("test", "kunskap");
-                        }
 
-                        if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
-                        {
-                            antalFragorEkonomi++;
+                            System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
+                            xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
+                            xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+                            xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar);
+                            xmlElement.SetAttribute("mittSvar2", SvarLista[i].mittSvar2);//i.ToString());
+                            xmlElement.SetAttribute("ratt", "ja");
+                            xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+                            //xmlElement.SetAttribute("frågan", LabelFraga.Text);
+
+
+                            if (licens == false)
+                            {
+                                xmlElement.SetAttribute("test", "licens");
+                            }
+                            if (licens == true)
+                            {
+                                xmlElement.SetAttribute("test", "kunskap");
+                            }
+
+
+                            if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                            {
+                                antalrattekonomi++;
+                                antalFragorEkonomi++;
+                            }
+                            if (SvarLista[i].Kategori == "Etik och regelverk.")
+                            {
+                                antalrattetik++;
+                                antalFragorEtik++;
+                            }
+                            if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                            {
+                                antalrattprodukter++;
+                                antalFragorProdukter++;
+                            }
+                            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                            docX.Save(Server.MapPath("XMLspara.xml"));
+                            totalrattSvar++;
+
+
                         }
-                        if (SvarLista[i].Kategori == "Etik och regelverk.")
+                        if (SvarLista[i].mittSvar != frageLista[i].RattSvar)
                         {
-                            antalFragorEtik++;
+                            System.Xml.XmlElement xmlElement = docX.CreateElement("svar");
+                            xmlElement.SetAttribute("nummer", frageLista[i].nummer);//i.ToString());
+                            xmlElement.SetAttribute("namn", Server.HtmlEncode(Anvandare.anvandarnamn));
+                            xmlElement.SetAttribute("mittSvar", SvarLista[i].mittSvar);//i.ToString());
+                            xmlElement.SetAttribute("ratt", "nej");
+                            xmlElement.SetAttribute("Kategori", SvarLista[i].Kategori);
+                            if (licens == false)
+                            {
+                                xmlElement.SetAttribute("test", "licens");
+                            }
+                            if (licens == true)
+                            {
+                                xmlElement.SetAttribute("test", "kunskap");
+                            }
+
+                            if (SvarLista[i].Kategori == "Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi")
+                            {
+                                antalFragorEkonomi++;
+                            }
+                            if (SvarLista[i].Kategori == "Etik och regelverk.")
+                            {
+                                antalFragorEtik++;
+                            }
+                            if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
+                            {
+                                antalFragorProdukter++;
+                            }
+                            docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
+                            docX.Save(Server.MapPath("XMLspara.xml"));
                         }
-                        if (SvarLista[i].Kategori == "Produkter och hantering av kundens affärer")
-                        {
-                            antalFragorProdukter++;
-                        }
-                        docX.DocumentElement.InsertBefore(xmlElement, xmlNode);
-                        docX.Save(Server.MapPath("XMLspara.xml"));
-                    }         
+                    }
+     
                     i++;
                     antalFragor++;
                 } 
@@ -461,48 +595,32 @@ namespace Uppgift4
             tabort = procentTotalDec.ToString();
             procentTotal = tabort.Replace(',', '.');
 
-            //    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
-                
-            //}
-            //if (licens == true)
-            //{
-            //    raknaTotal = (decimal)totalrattSvar / (decimal)antalFragor;
-            //    procentTotalDec = Math.Round(raknaTotal, 2);
-            //    tabort = procentTotalDec.ToString();
-            //    procentTotal = tabort.Replace(',', '.');
-                
-            //    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ")";
-           
-            //}
+
 
             string formprocentTotalDec = procentTotalDec.ToString("0.00%");
             //räkna på Etik ska överiga lagras i databas?
-            //if (antalFragorEtik != 0)
-            //{
+ 
                 raknaEtik = (decimal)antalrattetik / (decimal)antalFragorEtik;
                 procentEtikDec = Math.Round(raknaEtik, 2);
                 tabortEtik = procentEtikDec.ToString();
                 EtikTotal = tabortEtik.Replace(',', '.');
                 string formprocentEtikDec = procentEtikDec.ToString("0.00%");
-            //}
+      
             //Räkna på ekonomi
-            //if (antalFragorEkonomi != 0)
-            //{
+
                 raknaEkonomi = (decimal)antalrattekonomi / (decimal)antalFragorEkonomi;
                 procentEkonomiDec = Math.Round(raknaEkonomi, 2);
                 tabortEkonomi = procentEkonomiDec.ToString();
                 EkonomiTotal = tabortEkonomi.Replace(',', '.');
                 string formprocentEkonomiDec = procentEkonomiDec.ToString("0.00%");
-            //}
-            //if (antalFragorProdukter != 0)
-            //{
+
                 //Räkna på produkt
                 raknaProdukt = (decimal)antalrattprodukter / (decimal)antalFragorProdukter;
                 procentProduktDec = Math.Round(raknaProdukt, 2);
                 tabortProdukt = procentProduktDec.ToString();
                 ProduktTotal = tabortProdukt.Replace(',', '.');
                 string formprocentProduktDec = procentProduktDec.ToString("0.00%");
-            //}
+     
 
             if (procentTotalDec < SjuttioProcent)
             {
@@ -539,6 +657,20 @@ namespace Uppgift4
                 }
 
             }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('DU har för många fel, försök igen.')", true);
+                if (licens == false)
+                {
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('licens'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
+                    sparasql();
+                }
+                if (licens == true)
+                {
+                    sql = "insert into webbutveckling.test (testtyp,antalrattekonomi,antalrattprodukter,antalrattetik, antalratttotal, anvandarnamn, procenttotal,godkäntresultat, dagensdatum) values ('kunskap'," + antalrattekonomi + "," + antalrattprodukter + "," + antalrattetik + "," + totalrattSvar + ",'" + Anvandare.anvandarnamn + "'," + procentTotal + ",'nej', now())";
+                    sparasql();
+                }
+            }
 
             lblKategori.Text = "Antal rätt svar: " + totalrattSvar.ToString() + "<br />" + "Andel rätt procent total: " + formprocentTotalDec + "<br />" + "Andel rätt procent Etik: " + formprocentEtikDec + "<br />" + "Andel rätt procent Ekonomi: " + formprocentEkonomiDec + "<br />" + "Andel rätt procent Produkt: " + formprocentProduktDec;
                 sparaDatabas();
@@ -547,20 +679,30 @@ namespace Uppgift4
                 foreach (Object svar in SvarLista)
                 {   
                     string fragan = frageLista[x].fragan.ToString();
-                    
+                    string[] fragan2 = fragan.Split('(');
+                    string fragan3 = fragan2[0];
+                    string tom = "tom";
+
+                    string phrase2 = SvarLista[x].mittSvar2.ToString();
+
+                    phrase2 = phrase2.Replace("tom", "");
                     if(SvarLista[x].mittSvar == frageLista[x].RattSvar)
                     {
-                        string html = "<font style='color: green'>" + fragan + "</font>";
-                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString();
+                        string html = "<font style='color: green'>" + fragan3 + "</font>";
+
+                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString() + ", " + phrase2;
                     }
                     if (SvarLista[x].mittSvar != frageLista[x].RattSvar)
                     {
-                        string html = "<font style='color: red'>" + fragan + "</font>";
-                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString();
+                        string html = "<font style='color: red'>" + fragan3 + "</font>";
+                        lbl1.Text += "<br />" + html + ": " + SvarLista[x].mittSvar.ToString() + ", " + phrase2;
                     }
+
+                    string phrase = frageLista[x].RattSvar2.ToString();
                     
-                    
-                    lbl2.Text += "<br />" + frageLista[x].RattSvar.ToString();
+                    phrase = phrase.Replace("tom", "");
+
+                    lbl2.Text += "<br />" + frageLista[x].RattSvar.ToString() + ", " + phrase;
                     x++;
 
                 }
@@ -578,21 +720,66 @@ namespace Uppgift4
 
         protected void BtnNasta_Click(object sender, EventArgs e)
         {
-            if(RadioButtonList1.SelectedIndex == -1)
+
+
+
+
+            bool lasin = false;
+            int antalvalda = 0;
+            int haj = Convert.ToInt16(LabelNummer.Text);
+            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Välj ett svarsalternativ')", true); 
+                if (CheckBoxList1.Items[i].Selected)
+                {
+
+                    antalvalda++;
+                }
             }
-            else
+            if (LabelNummer.Text == "4")
             {
-                sparaXml();
-                int haj = Convert.ToInt16(LabelNummer.Text);
-                FrageNummer = haj + 1;
-                LasInFraga();
-            }       
+                if (CheckBoxList1.SelectedItem != null && antalvalda == 2)
+                {
+                    sparaXml();
+                    lasin = true;
+                    //LasInFraga();
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Välj två svarsalternativ')", true);
+                }
+
+
+            }
+
+            if (LabelNummer.Text != "4")
+            {
+                
+                if (RadioButtonList1.SelectedIndex == -1)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Välj ett svarsalternativ')", true);
+                }
+                if (RadioButtonList1.SelectedIndex != -1)
+                {
+                    sparaXml();
+                    lasin = true;
+                    //LasInFraga();
+
+                }
+
+            }
+            if (lasin == true)
+            {
+            FrageNummer = haj + 1;
+            LasInFraga();
+            }
+
+
         }
+        
 
         protected void BtnStartatest_Click(object sender, EventArgs e)
         {           
+            
             RadioButtonList1.Visible = true;
             //BtnForegaende.Visible = true;
             BtnNasta.Visible = true;
@@ -603,6 +790,7 @@ namespace Uppgift4
             lblRubrik.Visible = false;
             FrageNummer = 1;
             LasInFraga();
+            CheckBoxList1.Visible = false;
         }
 
         protected void BtnRatta_Click(object sender, EventArgs e)

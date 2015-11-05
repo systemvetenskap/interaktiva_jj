@@ -14,6 +14,7 @@ namespace Uppgift4
         public string b { get; set; }
         public string c { get; set; }
         public string RattSvar { get; set; }
+        public string RattSvar2 { get; set; }
         public string Kategori { get; set; }
 
         public string test { get; set; }

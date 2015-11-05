@@ -9,6 +9,7 @@
     <b>Jag</b>
     <c>Kung Danmark</c>
     <RattSvar>Kung Danmark</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Produkter och hantering av kundens affärer</Kategori>
     <test>licens</test>
   </fraga>
@@ -21,6 +22,7 @@
     <b>Kungen</b>
     <c>Joachim</c>
     <RattSvar>Joachim</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Ekonomi – nationalekonomi, finansiell ekonomi och privatekonomi</Kategori>
     <test>licens</test>
   </fraga>
@@ -33,17 +35,19 @@
     <b>jag</b>
     <c>du</c>
     <RattSvar>du</RattSvar>
+    <RattSvar2>tom</RattSvar2>
     <Kategori>Etik och regelverk.</Kategori>
     <test>licens</test>
   </fraga>
 
   <fraga>
     <nummer>4</nummer>
-    <fragan>Vad är etik?</fragan>
+    <fragan>Vad är etik? (Välj två alternativ, båda måste vara rätt för att du ska få rätt på frågan)</fragan>
     <a>ni</a>
     <b>jag</b>
     <c>du</c>
     <RattSvar>du</RattSvar>
+    <RattSvar2>jag</RattSvar2>
     <Kategori>Etik och regelverk.</Kategori>
     <test>licens</test>
   </fraga>
@@ -51,7 +55,3 @@
 
 </fragor>
 
-<!--
-Uppdatera/ändra sparad xml?
-Tips och trix xml?
--->

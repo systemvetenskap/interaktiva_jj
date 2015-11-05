@@ -33,7 +33,7 @@
 
        <div class="sektioner clearfix">
             <div class="sektion mobil">
-                <br />
+               
                 <asp:Label ID="lblKategori" runat="server"></asp:Label>
                 <br />
                 <asp:Label ID="lblRubrik" runat="server" Text="Label"></asp:Label>
@@ -47,12 +47,20 @@
             <asp:ListItem Value="B" Text="B"></asp:ListItem>
             <asp:ListItem Value="C" Text="C"></asp:ListItem>
             </asp:RadioButtonList>
+            
+                <asp:CheckBoxList ID="CheckBoxList1" runat="server" Visible="False">
+                <asp:ListItem  Value="A" Text="alla"></asp:ListItem>
+                <asp:ListItem  Value="B" Text="ni"></asp:ListItem>
+                <asp:ListItem  Value="C" Text="du"></asp:ListItem>
+                <asp:ListItem  Value="D" Text="jag"></asp:ListItem>
+                </asp:CheckBoxList>
             <asp:Button ID="BtnForegaende" runat="server" Text="Föregående" OnClick="BtnForegaende_Click" Visible="False" Width="80px" />
                 <asp:Button ID="BtnNasta" runat="server" Text="Nästa" OnClick="BtnNasta_Click" Visible="False" Width="80px" />
                 <asp:Button ID="BtnRatta" runat="server" OnClick="BtnRatta_Click" Text="Rätta" Width="80px" Visible="False" />
             </div>
             <div class="sektion sektion-andra mobil">
-                <asp:Label ID="lbl1" runat="server" Text="Dina Svar:" Visible="False"></asp:Label>                
+                <asp:Label ID="lbl1" runat="server" Text="Dina Svar:" Visible="False"></asp:Label> 
+                <asp:Image id="bilden" runat="server" src="http://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com" hidden="hidden"></asp:Image> 
             </div>
                 <div class="sektion sektion-tredje mobil">
                 <asp:Label ID="lbl2" runat="server" Text="Rätta Svar:" Visible="False"></asp:Label>              
