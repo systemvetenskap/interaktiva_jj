@@ -21,7 +21,7 @@ namespace Uppgift4
         AdmAnv akutellanvandare = new AdmAnv();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
         private void fyllerlista()
         {
@@ -58,7 +58,7 @@ namespace Uppgift4
             lblkunskap.Text = "Ska göra Kunskapstest(åku)";
             lbllicens.Text = "Ska göra Licenstest";
 
-            sql = "select * from webbutveckling.anvandare join webbutveckling.test on anvandare.anvandarnamn = test.anvandarnamn;";
+            sql = "select * from webbutveckling.anvandare";
             NpgsqlConnection conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["uppgift4"].ConnectionString);
             NpgsqlCommand command;
             conn.Open();
@@ -70,11 +70,12 @@ namespace Uppgift4
             {
                 string ett = dr["anvandarnamn"].ToString();
                 string tva = dr["licensierad"].ToString();
-                string tre = dr["dagensdatum"].ToString();
+
+
 
                 if (tva == "ja")
                 {
-                    lblkunskap.Text += "<br />" + ett + " senaste prov: " + tre;
+                    lblkunskap.Text += "<br />" + ett; 
                 }
                 else if (tva == "nej")
                 {
@@ -88,6 +89,7 @@ namespace Uppgift4
         {
             fyllerlista();
             laddatesttyp();
+            visaprov.Visible = true;
         }
 
         protected void ListBoxAnv_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,11 +127,12 @@ namespace Uppgift4
                 antpr.Text = dr["antalrattprodukter"].ToString();
                 antet.Text = dr["antalrattetik"].ToString();
                 antto.Text = dr["antalratttotal"].ToString();
-                testid.Text = dr["testid"].ToString();
+                testid.Text = dr["dagensdatum"].ToString();
                 procto.Text = dr["procenttotal"].ToString();
                 godkand.Text = dr["godkäntresultat"].ToString();
 
             }
+            conn.Close();
         }
         protected void visaprov_Click(object sender, EventArgs e)
         {

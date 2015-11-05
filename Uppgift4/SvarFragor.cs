@@ -10,6 +10,7 @@ namespace Uppgift4
         public string nummer { get; set; }
         public string namn { get; set; }
         public string mittSvar { get; set; }
+        public string mittSvar2 { get; set; }
         public string Kategori { get; set; }
         public string test { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿body {
 margin-top: 3px;
-background-image: url("http://wallpaper.pickywallpapers.com/1600x900/simple-clean-blue-pattern.jpg");
+background-image: url("http://www.planwallpaper.com/static/images/autumn_leaves_background-wallpaper-1920x1080.jpg");
     
     }
 h1{
@@ -31,7 +31,7 @@ header{
     max-width: 1100px;
     margin: 0 auto 0 auto;
     padding: 0 20px;
-    background-color: white;
+    background-color: #ffffff;
     font-family: 'Buxton Sketch';
     font-size: 100%;
 
@@ -41,7 +41,6 @@ header{
 nav ul li {
     list-style: none;
     float: left; 
-  
 }
 nav{
     
@@ -126,7 +125,7 @@ nav ul li a {
 }
 
 div.sektioner{
-
+    
     margin: 20px;
     width: 100%;
 }
@@ -171,7 +170,7 @@ div.body{
 }
 footer{
     
-    background-color: #1f1e1e;
+    background-color: #ead2ad;
     color: #808080;
     text-align: center;
     height: 40px;   
@@ -253,16 +252,26 @@ div.sektionerna{
         margin: 0 auto 0 auto;
     }
 
-    nav ul li {
+    /*nav ul li {
         width: 100%;
         border-bottom: 0px solid black;
         font-size: 80%;
-    }
+    }*/
 
     div.sektioner {
         margin: 50px 0px 0px 0px;
     }
-
+    footer
+    {
+        
+        font-size: 75%;
+        text-align: center;
+        
+    }
+    footer p 
+    {
+        margin-left: 30px;
+    }
     header {
         height: 48px;
         width: 152px;
