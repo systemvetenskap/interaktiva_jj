@@ -147,11 +147,18 @@ div.sektioner{
     width: 33%;
 
 }
-/*input#testtyp{
+/*.adminbox{
  border:2px solid #456879;
  border-radius:10px;
  height: 22px;
  width: 230px;*/
+ 
+}
+ border:2px solid #456879;
+ border-radius:10px;
+ height: 22px;
+ width: 230px;
+ text-align: right;
 }
 img {
     max-width: 90%;

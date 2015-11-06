@@ -144,7 +144,6 @@ namespace Uppgift4
 
                         if (fragansNummer == FrageNummer.ToString() && fraga.nummer == FrageNummer.ToString())
                         {
-
                             frageLista.Add(fraga);
                             kategori = null;
                             LabelFraga.Text = ": " + frageLista[FrageNummer].fragan;

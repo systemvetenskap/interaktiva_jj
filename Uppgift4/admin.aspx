@@ -50,14 +50,15 @@
             </div>
            
                 <div class="sektion sektion-tredje mobil">
-                <p>Testtyp:<asp:TextBox ID="testtyp" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Antalrätt ekonomi:<asp:TextBox ID="antek" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Antalrätt produkter:<asp:TextBox ID="antpr" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Antalrätt etik<asp:TextBox ID="antet" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Antalrätt total:<asp:TextBox ID="antto" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Datum<asp:TextBox ID="testid" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Procenttotal:<asp:TextBox ID="procto" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
-                <p>Godkänt resultat:<asp:TextBox ID="godkand" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+
+                <p>Testtyp:<asp:TextBox ID="testtyp" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt ekonomi:<asp:TextBox ID="antek" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt produkter:<asp:TextBox ID="antpr" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt etik<asp:TextBox ID="antet" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Antalrätt total:<asp:TextBox ID="antto" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Datum<asp:TextBox ID="testid" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Procenttotal:<asp:TextBox ID="procto" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
+                <p>Godkänt resultat:<asp:TextBox ID="godkand" class="adminbox" runat="server" Width="69px" ReadOnly="True"></asp:TextBox></p>
                  
             </div>
 
